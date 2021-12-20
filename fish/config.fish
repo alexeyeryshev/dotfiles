@@ -25,12 +25,13 @@ set -g theme_newline_cursor yes
 # abbr
 abbr -a gu "git add -A && git commit -a -m 'update' && git push"
 abbr -a gpf "git push --force"
-abbr -a gpr "git-pull-recursive"
+abbr -a gpr "gpr"
 abbr -a l "ll -a"
 abbr -a t "tmux"
 abbr -a v "vim"
 abbr -a vv "vim ~/.dotfiles/vim/vimrc.symlink"
 abbr -a p "pbcopy"
+abbr -a dc "docker compose"
 # abbr -a gcam "git commit -a -m --no-edit"
 
 # functions
@@ -57,4 +58,10 @@ status --is-interactive; and source (rbenv init -|psub)
 
 # Rust
 set PATH $HOME/.cargo/bin $PATH
+
+# Poetry (Python dependency management tool)
+set PATH /Users/alexey_eryshev/.local/bin $PATH
+
+# Set vim for fish
+set -gx EDITOR vim
 

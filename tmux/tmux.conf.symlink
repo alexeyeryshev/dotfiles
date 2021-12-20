@@ -1,3 +1,6 @@
+# use fish shell by default
+set -g default-command "${SHELL}"
+
 # activate mouse
 set -g mouse on
 

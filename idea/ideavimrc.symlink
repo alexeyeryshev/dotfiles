@@ -1,16 +1,21 @@
+" Map leader to space
 let mapleader = "\<Space>"
+
+""" Plugins
+set multiple-cursors
+set textobj-indent
 
 " map <Leader>d :action GotoImplementation<CR>
 
 map <Leader>l :action FindUsages<CR>
 
-map <Leader>s :action FileStructurePopup<CR>
+" map <Leader>s :action FileStructurePopup<CR>
 
 " Paste in insert mode, block selection otherwise
 imap <C-v> <Esc>:action $Paste<CR>
 
 " Block selection
-map <C-s> :action EditorSelectWord<CR>
+nnoremap <C-v> :action EditorSelectWord<CR>
 
 " Close active editor
 map <leader>w :action CloseContent<CR>
@@ -18,3 +23,26 @@ map <leader>w :action CloseContent<CR>
 " Override Intellij Navigation
 nmap <leader>b :action Back<cr>
 nmap <leader>f :action Forward<cr>
+nmap <leader>p :action GotoAction<cr>
+nmap <leader>r :action RunClass<cr>
+
+" Remap multiple-cursors shortcuts to match terryma/vim-multiple-cursors
+" kudos to https://stackoverflow.com/a/65430514/5100295
+nmap <C-n> <Plug>NextWholeOccurrence
+xmap <C-n> <Plug>NextWholeOccurrence
+nmap g<C-n> <Plug>NextOccurrence
+xmap g<C-n> <Plug>NextOccurrence
+nmap <C-x> <Plug>SkipOccurrence
+xmap <C-x> <Plug>SkipOccurrence
+nmap <C-p> <Plug>RemoveOccurrence
+xmap <C-p> <Plug>RemoveOccurrence
+" Note that the default <A-n> and g<A-n> shortcuts don't work on Mac due to
+" dead keys.
+" <A-n> is used to enter accented text e.g. ñ
+nmap <S-C-n> <Plug>AllWholeOccurrences
+xmap <S-C-n> <Plug>AllWholeOccurrences
+nmap g<S-C-n> <Plug>AllOccurrences
+xmap g<S-C-n> <Plug>AllOccurrences
+
+" Reload vimrc
+nnoremap <leader>si :source ~/.ideavimrc<CR>
