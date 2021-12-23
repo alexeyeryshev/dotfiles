@@ -1,3 +1,7 @@
 [submodule "i3/tools/xkblayout-state/xkblayout-state"]
 	path = i3/tools/xkblayout-state/xkblayout-state
 	url = https://github.com/nonpop/xkblayout-state.git
+[submodule "dotbot"]
+	path = dotbot
+	url = https://github.com/anishathalye/dotbot
+	ignore = dirty
