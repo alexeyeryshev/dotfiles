@@ -63,5 +63,5 @@ set PATH $HOME/.cargo/bin $PATH
 set PATH /Users/alexey_eryshev/.local/bin $PATH
 
 # Set vim for fish
-set -gx EDITOR vim
+set -gx EDITOR code
 

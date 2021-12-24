@@ -1,0 +1,41 @@
+- defaults:
+    link:
+      relink: true
+    shell:
+      stdout: true
+      stderr: true
+
+- clean:
+    ~/:
+      force: true
+    ~/.config:
+      recursive: true
+
+- create:
+    - ~/.dotbot-git
+
+- git:
+    ~/.dotbot-git/fonts:
+        url: git@github.com:powerline/fonts.git
+        description: Powerline fonts
+
+- shell:
+  - [cd ~/.dotbot-git/fonts && ./install.sh, "Install Powerline fonts"]
+
+
+- link:
+    ~/.config/fish/config.fish:
+      path: fish/config.fish
+      force: true
+      create: true
+    ~/.config/fish/functions/:
+      path: fish/functions/*
+      create: true
+      glob: true
+    ~/.config/omf:
+      path: omf
+
+# - shell:
+#     - [curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish, Install Oh My Fish]
+#     - [omf install, Install Oh My Fish plugins]
+#     - [omf reload, Reload Oh My Fish]
