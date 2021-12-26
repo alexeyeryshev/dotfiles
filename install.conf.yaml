@@ -14,6 +14,10 @@
 - create:
     - ~/.dotbot-git
 
+- brewfile:
+    - Brewfile
+
+# Powerline fonts
 - git:
     ~/.dotbot-git/fonts:
         url: git@github.com:powerline/fonts.git
@@ -22,7 +26,8 @@
 - shell:
   - [cd ~/.dotbot-git/fonts && ./install.sh, "Install Powerline fonts"]
 
-
+# Install Fish and Oh My Fish
+# Fish and Oh My Fish depends on Conda and Java
 - link:
     ~/.config/fish/config.fish:
       path: fish/config.fish
@@ -35,7 +40,12 @@
     ~/.config/omf:
       path: omf
 
+- git:
+    ~/.dotbot-git/oh-my-fish:
+        url: git@github.com:oh-my-fish/oh-my-fish.git
+        description: Oh my fish
+
 # - shell:
-#     - [curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish, Install Oh My Fish]
+#     - [cd ~/.dotbot-git/oh-my-fish && bin/install --offline, Install Oh My Fish]
 #     - [omf install, Install Oh My Fish plugins]
 #     - [omf reload, Reload Oh My Fish]

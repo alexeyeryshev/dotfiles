@@ -1,5 +1,5 @@
 tap 'homebrew/bundle'
-tap 'koekeishiya/formulae'
+# tap 'koekeishiya/formulae'
 
 brew 'jq'
 brew 'vim', args={'--with-lua': true}
@@ -28,7 +28,7 @@ cask 'anki'
 # keeweb knows how to sync through dropbox w/out the official client
 # cask 'dropbox'
 #`cask 'front'
-cask 'flux'
+# cask 'flux'
 cask 'karabiner-elements'
 cask 'iglance'
 
