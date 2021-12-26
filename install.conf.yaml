@@ -49,3 +49,11 @@
 #     - [cd ~/.dotbot-git/oh-my-fish && bin/install --offline, Install Oh My Fish]
 #     - [omf install, Install Oh My Fish plugins]
 #     - [omf reload, Reload Oh My Fish]
+
+# Karabiner elements config
+# Karabiner doesn't like direct linking of config file, instead we should symlink a directory
+- link:
+    ~/.config/karabiner:
+      path: karabiner
+      force: true
+      create: true
