@@ -1,5 +1,4 @@
 tap 'homebrew/bundle'
-# tap 'koekeishiya/formulae'
 
 brew 'jq'
 brew 'vim', args={'--with-lua': true}
@@ -13,22 +12,25 @@ brew 'tmux'
 brew 'bat'
 brew 'rbenv'
 brew 'nvm'
+
+cask 'keeweb'
+cask 'visual-studio-code'
+cask 'rambox'
+cask 'anki'
+cask 'karabiner-elements'
+cask 'iglance'
+cask 'rectangle'
+
+
 # Holding out on this one as it demands SIP disabled
+# tap 'koekeishiya/formulae'
 # brew 'chunkwm', args={'with-logging': true}
 # brew 'yabai'
 # brew 'skhd', args={'with-logging': true}
-
-# cask 'google-chrome'
-cask 'keeweb'
-cask 'visual-studio-code'
-# Installed through Jetbrains Toolbox
-# cask 'intellij-idea'
-cask 'rambox'
-cask 'anki'
 # keeweb knows how to sync through dropbox w/out the official client
 # cask 'dropbox'
 #`cask 'front'
 # cask 'flux'
-cask 'karabiner-elements'
-cask 'iglance'
-
+# Installed through Jetbrains Toolbox
+# cask 'intellij-idea'
+# cask 'google-chrome'

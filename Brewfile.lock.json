@@ -2,7 +2,7 @@
   "entries": {
     "tap": {
       "homebrew/bundle": {
-        "revision": "0ecf67d01e219fa53fffdca35642d556e0d6d80a"
+        "revision": "060b85b685e8e4fe9076197f3147583f49581348"
       },
       "koekeishiya/formulae": {
         "revision": "2840281ee15bebd679f4af0a8750bfabeba6e25f"
@@ -545,6 +545,12 @@
         "options": {
           "full_name": "iglance"
         }
+      },
+      "rectangle": {
+        "version": "0.49,54",
+        "options": {
+          "full_name": "rectangle"
+        }
       }
     }
   },
@@ -561,7 +567,7 @@
       "monterey": {
         "HOMEBREW_VERSION": "3.3.9",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "37b1ec5189d5d75b439837bc3547d5134ba0d935",
+        "Homebrew/homebrew-core": "718b8d8a254d0b39a0a2dd8098d64e16b1af10c5",
         "CLT": "11.3.0.32.29",
         "Xcode": "11.7",
         "macOS": "12.0.1"
