@@ -551,6 +551,12 @@
         "options": {
           "full_name": "rectangle"
         }
+      },
+      "alt-tab": {
+        "version": "6.29.0",
+        "options": {
+          "full_name": "alt-tab"
+        }
       }
     }
   },

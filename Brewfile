@@ -17,9 +17,14 @@ cask 'keeweb'
 cask 'visual-studio-code'
 cask 'rambox'
 cask 'anki'
+# change system wide shortcuts
 cask 'karabiner-elements'
+# show some performance indicators
 cask 'iglance'
+# move windows around
 cask 'rectangle'
+# improve alt-tab functionality
+cask 'alt-tab'
 
 
 # Holding out on this one as it demands SIP disabled
