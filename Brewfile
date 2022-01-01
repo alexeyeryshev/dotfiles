@@ -25,6 +25,9 @@ cask 'iglance'
 cask 'rectangle'
 # improve alt-tab functionality
 cask 'alt-tab'
+cask 'notion'
+# install Python management tool
+cask 'miniconda'
 
 
 # Holding out on this one as it demands SIP disabled
