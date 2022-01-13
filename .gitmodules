@@ -1,3 +1,12 @@
 [submodule "i3/tools/xkblayout-state/xkblayout-state"]
 	path = i3/tools/xkblayout-state/xkblayout-state
 	url = https://github.com/nonpop/xkblayout-state.git
+[submodule "dotbot"]
+	path = dotbot
+	url = https://github.com/anishathalye/dotbot
+[submodule "dotbot-plugins/dotbot-git"]
+	path = dotbot-plugins/dotbot-git
+	url = https://github.com/DrDynamic/dotbot-git.git
+[submodule "dotbot-brew"]
+	path = dotbot-plugins/dotbot-brew
+	url = https://github.com/d12frosted/dotbot-brew.git

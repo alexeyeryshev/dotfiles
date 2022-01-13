@@ -2,3 +2,6 @@ git/gitconfig.local.symlink
 _aliases.zsh
 *.un~
 .fonts/.uuid
+
+# Dotfiles specific
+karabiner/automatic_backups
