@@ -45,10 +45,11 @@
         url: git@github.com:oh-my-fish/oh-my-fish.git
         description: Oh my fish
 
-# - shell:
-#     - [cd ~/.dotbot-git/oh-my-fish && bin/install --offline, Install Oh My Fish]
-#     - [omf install, Install Oh My Fish plugins]
-#     - [omf reload, Reload Oh My Fish]
+- shell:
+    - [cd ~/.dotbot-git/oh-my-fish && bin/install --offline --yes, Install Oh My Fish]
+    - [omf install, Install Oh My Fish plugins]
+    - [omf reload, Reload Oh My Fish]
+    - [echo "DO NOT FORGET TO SET FISH AS THE SHELL OF CHOICE FOR YOUR TERMINAL."]
 
 # Karabiner elements config
 # Karabiner doesn't like direct linking of config file, instead we should symlink a directory

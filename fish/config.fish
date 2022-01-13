@@ -26,12 +26,15 @@ set -g theme_newline_cursor yes
 abbr -a gu "git add -A && git commit -a -m 'update' && git push"
 abbr -a gpf "git push --force"
 abbr -a gpr "gpr"
-abbr -a l "ll -a"
 abbr -a t "tmux"
 abbr -a v "vim"
 abbr -a vv "vim ~/.dotfiles/vim/vimrc.symlink"
 abbr -a p "pbcopy"
 abbr -a dc "docker compose"
+abbr -a cat "bat"
+abbr -a ll "exa"
+abbr -a ls "exa"
+abbr -a l "exa"
 # abbr -a gcam "git commit -a -m --no-edit"
 
 # functions

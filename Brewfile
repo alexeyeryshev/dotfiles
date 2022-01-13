@@ -12,6 +12,8 @@ brew 'tmux'
 brew 'bat'
 brew 'rbenv'
 brew 'nvm'
+brew 'exa'
+brew 'bat'
 
 cask 'keeweb'
 cask 'visual-studio-code'
