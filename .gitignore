@@ -5,3 +5,4 @@ _aliases.zsh
 
 # Dotfiles specific
 karabiner/automatic_backups
+fish/functions/proprietary_config.fish
