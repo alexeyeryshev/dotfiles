@@ -24,7 +24,7 @@ set -g theme_newline_cursor yes
 
 # abbr
 abbr -a gu "git add -A && git commit -a -m 'update' && git push"
-abbr -a gpf "git push --force"
+abbr -a gpf "git push --force-with-lease"
 abbr -a gpr "gpr"
 abbr -a t "tmux"
 abbr -a v "vim"
@@ -35,7 +35,9 @@ abbr -a cat "bat"
 abbr -a ll "exa"
 abbr -a ls "exa"
 abbr -a l "exa"
+abbr -a sizes "du -h -a | sort -k1 -rh"
 # abbr -a gcam "git commit -a -m --no-edit"
+abbr -a kali "docker run -ti -v (pwd):/app -w /app --name=kali kalilinux/kali-last-release"
 
 # functions
 function fkill
@@ -67,4 +69,6 @@ set PATH /Users/alexey_eryshev/.local/bin $PATH
 
 # Set vim for fish
 set -gx EDITOR code
+
+# Set 
 
