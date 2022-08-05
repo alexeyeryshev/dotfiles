@@ -39,12 +39,15 @@ abbr -a sizes "du -h -a | sort -k1 -rh"
 # abbr -a gcam "git commit -a -m --no-edit"
 abbr -a kali "docker run -ti -v (pwd):/app -w /app --name=kali kalilinux/kali-last-release"
 
-# functions
-function fkill
-  set pid (ps -ef | sed 1d | fzf -m | awk '{print $2}')
+function fkill -d "Kill processes with fzf"
+  eval "ps aux | grep $USER | fzf --header (ps aux | head -1) --query (commandline)" | read select
 
-  if test "x$pid" != "x"
-    xargs kill $pid
+  if not test -z $select
+    eval "echo -n \"$select\" | awk '{ print \$2 }'" | read pid
+
+    if kill -0 $pid
+      kill -9 $pid
+    end
   end
 end
 
@@ -66,9 +69,4 @@ set PATH $HOME/.cargo/bin $PATH
 
 # Poetry (Python dependency management tool)
 set PATH /Users/alexey_eryshev/.local/bin $PATH
-
-# Set vim for fish
-set -gx EDITOR code
-
-# Set 
 
