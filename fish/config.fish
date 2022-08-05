@@ -56,6 +56,21 @@ function unswap
   echo removing $file
 end
 
+function up -d 'Travel up any number of directories'
+    test -n "$argv" || set argv "1"
+    set -l balloons (string repeat -n "$argv[1]" "../" 2>/dev/null) || begin
+        echo "Invalid arguments '$argv'"\n"Usage: "(status function)" <levels>" >&2
+        return 2
+    end
+    cd $balloons
+end
+
+function upp --description 'Get the path of an ancestor directory'
+    test -n "$argv" || set argv 1
+    set pathname $PWD/(string repeat -n "$argv[1]" ../ 2>/dev/null)
+    realpath $pathname
+end
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 eval /usr/local/Caskroom/miniconda/base/bin/conda "shell.fish" "hook" $argv | source
