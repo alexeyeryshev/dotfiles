@@ -15,6 +15,10 @@ brew 'nvm'
 brew 'exa'
 brew 'bat'
 
+# Brave
+cask 'brave-browser'
+# ITerm
+cask 'iterm2'
 cask 'keeweb'
 cask 'visual-studio-code'
 cask 'rambox'

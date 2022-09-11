@@ -1,5 +1,7 @@
 # proprietary config
-proprietary_config
+if test -f ~/.config/fish/functions/proprietary_config.fish
+  proprietary_config
+end
 
 # mix emacs and vim keybindings
 fish_hybrid_key_bindings
@@ -71,17 +73,16 @@ function upp --description 'Get the path of an ancestor directory'
     realpath $pathname
 end
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-eval /usr/local/Caskroom/miniconda/base/bin/conda "shell.fish" "hook" $argv | source
-# <<< conda initialize <<<
-
 # activate rbenv
 status --is-interactive; and source (rbenv init -|psub)
 
 # Rust
-set PATH $HOME/.cargo/bin $PATH
+# set PATH $HOME/.cargo/bin $PATH
 
 # Poetry (Python dependency management tool)
-set PATH /Users/alexey_eryshev/.local/bin $PATH
+# set PATH /Users/alexey_eryshev/.local/bin $PATH
 
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+eval /opt/homebrew/Caskroom/miniconda/base/bin/conda "shell.fish" "hook" $argv | source
+# <<< conda initialize <<<

@@ -33,8 +33,8 @@
       path: fish/config.fish
       force: true
       create: true
-    ~/.config/fish/functions/:
-      path: fish/functions/*
+    ~/.config/fish/functions/fzf_key_bindings.fish:
+      path: fish/functions/fzf_key_bindings.fish
       create: true
       glob: true
     ~/.config/omf:
@@ -46,10 +46,11 @@
         description: Oh my fish
 
 - shell:
-    - [cd ~/.dotbot-git/oh-my-fish && bin/install --offline --yes, Install Oh My Fish]
-    - [omf install, Install Oh My Fish plugins]
-    - [omf reload, Reload Oh My Fish]
-    - [echo "DO NOT FORGET TO SET FISH AS THE SHELL OF CHOICE FOR YOUR TERMINAL."]
+    - [cd ~/.dotbot-git/oh-my-fish && bin/install --offline --yes --noninteractive, Install Oh My Fish]
+
+# Conda
+- shell:
+    - [conda init fish, Init conda for fish]
 
 # Karabiner elements config
 # Karabiner doesn't like direct linking of config file, instead we should symlink a directory
@@ -59,10 +60,13 @@
       force: true
       create: true
 
-
 # Tmux
 - link:
     ~/.config/tmux/tmux.conf:
       path: tmux/tmux.conf
       force: true
       create: true
+
+# Follow ups
+- shell:
+    - [echo "You're done!", Setup fish as main shell for Iterm2 in Iterm2's settings]
