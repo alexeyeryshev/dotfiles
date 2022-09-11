@@ -10,3 +10,4 @@ My dotfiles based on Dotbot.
 ```
 defaults write -g ApplePressAndHoldEnabled -bool false
 ```
+2. Automate Homewbrew install
