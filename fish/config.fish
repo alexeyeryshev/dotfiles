@@ -74,7 +74,9 @@ function upp --description 'Get the path of an ancestor directory'
 end
 
 # activate rbenv
-status --is-interactive; and source (rbenv init -|psub)
+if test (which rbenv)
+  status --is-interactive; and source (rbenv init -|psub)
+end
 
 # Rust
 # set PATH $HOME/.cargo/bin $PATH
