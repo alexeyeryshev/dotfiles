@@ -73,9 +73,16 @@ function upp --description 'Get the path of an ancestor directory'
     realpath $pathname
 end
 
+############### Tools ################
+
 # activate rbenv
 if test (which rbenv)
   status --is-interactive; and source (rbenv init -|psub)
+end
+
+# add brew to fish path
+if test -f /opt/homebrew/bin/brew
+  eval (/opt/homebrew/bin/brew shellenv)
 end
 
 # Rust
