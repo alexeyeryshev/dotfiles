@@ -40,6 +40,7 @@ abbr -a l "exa"
 abbr -a sizes "du -h -a | sort -k1 -rh"
 # abbr -a gcam "git commit -a -m --no-edit"
 abbr -a kali "docker run -ti -v (pwd):/app -w /app --name=kali kalilinux/kali-last-release"
+abbr -a la "exa -la"
 
 function fkill -d "Kill processes with fzf"
   eval "ps aux | grep $USER | fzf --header (ps aux | head -1) --query (commandline)" | read select
