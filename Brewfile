@@ -34,6 +34,8 @@ cask 'alt-tab'
 cask 'notion'
 # install Python management tool
 cask 'miniconda'
+# Raycast - an alternative command palette
+cask 'raycast'
 
 
 # Holding out on this one as it demands SIP disabled

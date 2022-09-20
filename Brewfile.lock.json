@@ -2,7 +2,7 @@
   "entries": {
     "tap": {
       "homebrew/bundle": {
-        "revision": "c92add2213682d16ea48268fbb0e61f2d1f27f19"
+        "revision": "95e1114e202c57887b761e268f43f0077f593f0f"
       },
       "koekeishiya/formulae": {
         "revision": "2840281ee15bebd679f4af0a8750bfabeba6e25f"
@@ -528,7 +528,7 @@
         }
       },
       "visual-studio-code": {
-        "version": "1.71.0",
+        "version": "1.71.2",
         "options": {
           "full_name": "visual-studio-code"
         }
@@ -564,7 +564,7 @@
         }
       },
       "karabiner-elements": {
-        "version": "14.8.0",
+        "version": "14.9.0",
         "options": {
           "full_name": "karabiner-elements"
         }
@@ -588,7 +588,7 @@
         }
       },
       "notion": {
-        "version": "2.1.1",
+        "version": "2.1.2",
         "options": {
           "full_name": "notion"
         }
@@ -600,7 +600,7 @@
         }
       },
       "brave-browser": {
-        "version": "1.43.89.0,143.89",
+        "version": "1.43.93.0,143.93",
         "options": {
           "full_name": "brave-browser"
         }
@@ -609,6 +609,12 @@
         "version": "3.4.16",
         "options": {
           "full_name": "iterm2"
+        }
+      },
+      "raycast": {
+        "version": "1.39.3",
+        "options": {
+          "full_name": "raycast"
         }
       }
     }
@@ -624,12 +630,12 @@
         "macOS": "11.0.1"
       },
       "monterey": {
-        "HOMEBREW_VERSION": "3.6.1-dirty",
+        "HOMEBREW_VERSION": "3.6.2",
         "HOMEBREW_PREFIX": "/opt/homebrew",
-        "Homebrew/homebrew-core": "cc605f71d4568813f5cb0ab7d7416d9b348c1cad",
-        "CLT": "13.4.0.0.1.1651278267",
-        "Xcode": "13.4",
-        "macOS": "12.5.1"
+        "Homebrew/homebrew-core": "c1b0e95c0069cb2a49fac440301d0d7c8125c557",
+        "CLT": "14.0.0.0.1.1661618636",
+        "Xcode": "14.0",
+        "macOS": "12.6"
       }
     }
   }
