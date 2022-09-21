@@ -22,6 +22,9 @@
     ~/.dotbot-git/fonts:
         url: git@github.com:powerline/fonts.git
         description: Powerline fonts
+    ~/dev/personal/sandbox:
+        url: git@gitlab.com:eryshev/sandbox.git
+        description: Private notes
 
 - shell:
   - [cd ~/.dotbot-git/fonts && ./install.sh, "Install Powerline fonts"]
