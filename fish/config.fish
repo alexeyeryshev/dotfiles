@@ -81,10 +81,8 @@ if test (which rbenv)
   status --is-interactive; and source (rbenv init -|psub)
 end
 
-# add brew to fish path
-if test -f /opt/homebrew/bin/brew
-  eval (/opt/homebrew/bin/brew shellenv)
-end
+# add brew to fish path if it's not there
+contains /opt/homebrew/bin $PATH; or eval (/opt/homebrew/bin/brew shellenv)
 
 # Rust
 # set PATH $HOME/.cargo/bin $PATH
