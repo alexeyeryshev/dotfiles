@@ -2,8 +2,8 @@
 let mapleader = "\<Space>"
 
 """ Plugins
-set multiple-cursors
-set textobj-indent
+" set multiple-cursors
+" set textobj-indent
 
 " map <Leader>d :action GotoImplementation<CR>
 
@@ -21,10 +21,10 @@ nnoremap <C-v> :action EditorSelectWord<CR>
 map <leader>w :action CloseContent<CR>
 
 " Override Intellij Navigation
-nmap <leader>b :action Back<cr>
-nmap <leader>f :action Forward<cr>
-nmap <leader>p :action GotoAction<cr>
-nmap <leader>r :action RunClass<cr>
+nmap <leader>b <Action>(Back)
+nmap <leader>f <Action>(Forward)
+" nmap <leader>p <Action>GotoAction<cr>
+" nmap <leader>r <Action>RunClass<cr>
 
 " Remap multiple-cursors shortcuts to match terryma/vim-multiple-cursors
 " kudos to https://stackoverflow.com/a/65430514/5100295

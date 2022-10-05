@@ -42,6 +42,8 @@
       glob: true
     ~/.config/omf:
       path: omf
+    ~/.ideavimrc:
+      path: idea/.ideavimrc
 
 - git:
     ~/.dotbot-git/oh-my-fish:
