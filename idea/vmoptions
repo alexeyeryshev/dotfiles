@@ -1,9 +1,9 @@
 -server
 -ea
-# Maximum memory allocation for the JVM heap. Increase as needed, but not too much.
--Xmx8g
 # Initial memory allocation for the JVM heap
--Xms4g
+-Xms7g
+# Maximum memory allocation for the JVM heap. Increase as needed, but not too much.
+-Xmx14g
 # Use G1GC for heaps larger than 4GB
 -XX:+UseG1GC
 # Disable file pathes cache as Intellij is already caching it
@@ -19,7 +19,7 @@
 # Nonblocking reads for git operations
 -Dgit.blocking.read=false
 # Disable git indexing
--Dvcs.log.index.git=true
+-Dvcs.log.index.git=false
 # Nonblocking io based refresh worker
 -Dvfs.use.nio-based.local.refresh.worker=true
 # metaspace free ratio growing
