@@ -27,7 +27,6 @@ set -g theme_newline_cursor yes
 # abbr
 abbr -a gu "git add -A && git commit -a -m 'update' && git push"
 abbr -a gpf "git push --force-with-lease"
-abbr -a gpr "gpr"
 abbr -a t "tmux"
 abbr -a v "vim"
 abbr -a vv "vim ~/.dotfiles/vim/vimrc.symlink"
@@ -41,6 +40,8 @@ abbr -a sizes "du -h -a | sort -k1 -rh"
 # abbr -a gcam "git commit -a -m --no-edit"
 abbr -a kali "docker run -ti -v (pwd):/app -w /app --name=kali --rm  --security-opt 'seccomp=unconfined' --cap-add=SYS_PTRACE kali /usr/bin/zsh"
 abbr -a la "exa -la"
+abbr -a gfu "git branch --set-upstream-to=origin/$(git rev-parse --abbrev-ref HEAD)"
+abbr -a gprpf "git pull --rebase && git push --force-with-lease"
 
 function fkill -d "Kill processes with fzf"
   eval "ps aux | grep $USER | fzf --header (ps aux | head -1) --query (commandline)" | read select
@@ -72,6 +73,12 @@ function upp --description 'Get the path of an ancestor directory'
     test -n "$argv" || set argv 1
     set pathname $PWD/(string repeat -n "$argv[1]" ../ 2>/dev/null)
     realpath $pathname
+end
+
+function gpr
+  set cmd "git add --all && git commit -am '$argv[1]' && git push"
+  echo $cmd
+  eval $cmd
 end
 
 ############### Tools ################
