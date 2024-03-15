@@ -90,6 +90,7 @@ end
 
 # add brew to fish path if it's not there
 contains /opt/homebrew/bin $PATH; or eval (/opt/homebrew/bin/brew shellenv)
+contains $HOME/.local/bin $PATH; or set PATH $HOME/.local/bin $PATH
 
 # Rust
 # set PATH $HOME/.cargo/bin $PATH
