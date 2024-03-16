@@ -89,7 +89,12 @@ if test (which rbenv)
 end
 
 # add brew to fish path if it's not there
-contains /opt/homebrew/bin $PATH; or eval (/opt/homebrew/bin/brew shellenv)
+for bindir in /usr/local/bin /opt/homebrew/bin
+    if test -d $bindir; and not contains $bindir $PATH
+      fish_add_path -p $bindir
+      eval (brew shellenv)
+    end
+end
 contains $HOME/.local/bin $PATH; or set PATH $HOME/.local/bin $PATH
 
 # Rust
@@ -100,5 +105,5 @@ contains $HOME/.local/bin $PATH; or set PATH $HOME/.local/bin $PATH
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-eval /usr/local/Caskroom/miniconda/base/bin/conda "shell.fish" "hook" $argv | source
+eval /opt/homebrew/Caskroom/miniconda/base/bin/conda "shell.fish" "hook" $argv | source
 # <<< conda initialize <<<
