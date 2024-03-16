@@ -14,7 +14,7 @@ Kudos to those notes on iterm2 configuraiton:
 1. Automate OS X defaults:
 
 ```
-defaults write -g ApplePressAndHoldEnabled -bool false
+./set-defaults.sh
 ```
 2. Automate Homewbrew install
 3. Automate Iterm2 configuration:
