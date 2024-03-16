@@ -12,7 +12,8 @@ brew 'tmux'
 brew 'bat'
 brew 'rbenv'
 brew 'nvm'
-brew 'exa'
+# it seems that exa is not maintained anymore
+# brew 'exa'
 brew 'bat'
 
 # Brave
