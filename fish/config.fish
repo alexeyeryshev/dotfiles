@@ -97,13 +97,9 @@ for bindir in /usr/local/bin /opt/homebrew/bin
 end
 contains $HOME/.local/bin $PATH; or set PATH $HOME/.local/bin $PATH
 
-# Rust
-# set PATH $HOME/.cargo/bin $PATH
-
-# Poetry (Python dependency management tool)
-# set PATH /Users/alexey_eryshev/.local/bin $PATH
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-eval /opt/homebrew/Caskroom/miniconda/base/bin/conda "shell.fish" "hook" $argv | source
-# <<< conda initialize <<<
+# custom conda initialization
+for conda_bin in /opt/homebrew/Caskroom/miniconda/base/bin/conda /usr/local/Caskroom/miniconda/base/bin/conda
+    if test -f $conda_bin
+      eval $conda_bin "shell.fish" "hook" | source
+    end
+end
