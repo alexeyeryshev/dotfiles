@@ -25,3 +25,4 @@ defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/dotfiles
 defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 ```
 4. Set fira code as default in iterm2
+5. Fix Brewfile casks install

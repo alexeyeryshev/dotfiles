@@ -16,6 +16,7 @@ brew 'nvm'
 # brew 'exa'
 brew 'bat'
 
+# This doesn't seem to work anymore
 # Brave
 cask 'brave-browser'
 # ITerm
