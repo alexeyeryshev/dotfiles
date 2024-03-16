@@ -33,8 +33,8 @@ abbr -a vv "vim ~/.dotfiles/vim/vimrc.symlink"
 abbr -a p "pbcopy"
 abbr -a dc "docker compose"
 abbr -a cat "bat"
-abbr -a ll "exa"
-abbr -a ls "exa"
+# abbr -a ll "exa"
+# abbr -a ls "exa"
 abbr -a l "exa"
 abbr -a sizes "du -h -a | sort -k1 -rh"
 # abbr -a gcam "git commit -a -m --no-edit"
@@ -100,5 +100,5 @@ contains $HOME/.local/bin $PATH; or set PATH $HOME/.local/bin $PATH
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-eval /opt/homebrew/Caskroom/miniconda/base/bin/conda "shell.fish" "hook" $argv | source
+eval /usr/local/Caskroom/miniconda/base/bin/conda "shell.fish" "hook" $argv | source
 # <<< conda initialize <<<
