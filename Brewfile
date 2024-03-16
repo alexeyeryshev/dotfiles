@@ -36,17 +36,3 @@ cask 'notion'
 cask 'miniconda'
 # Raycast - an alternative command palette
 cask 'raycast'
-
-
-# Holding out on this one as it demands SIP disabled
-# tap 'koekeishiya/formulae'
-# brew 'chunkwm', args={'with-logging': true}
-# brew 'yabai'
-# brew 'skhd', args={'with-logging': true}
-# keeweb knows how to sync through dropbox w/out the official client
-# cask 'dropbox'
-#`cask 'front'
-# cask 'flux'
-# Installed through Jetbrains Toolbox
-# cask 'intellij-idea'
-# cask 'google-chrome'
