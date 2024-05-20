@@ -42,6 +42,8 @@ abbr -a kali "docker run -ti -v (pwd):/app -w /app --name=kali --rm  --security-
 abbr -a la "exa -la"
 abbr -a gfu "git branch --set-upstream-to=origin/$(git rev-parse --abbrev-ref HEAD)"
 abbr -a gprpf "git pull --rebase && git push --force-with-lease"
+abbr -a gcs "gh copilot suggest"
+abbr -a gce "gh copilot explain"
 
 function fkill -d "Kill processes with fzf"
   eval "ps aux | grep $USER | fzf --header (ps aux | head -1) --query (commandline)" | read select
@@ -103,3 +105,10 @@ for conda_bin in /opt/homebrew/Caskroom/miniconda/base/bin/conda /usr/local/Cask
       eval $conda_bin "shell.fish" "hook" | source
     end
 end
+
+# flutter
+contains $HOME/dev/personal/flutter/flutter/bin $PATH; or set PATH $HOME/dev/personal/flutter/flutter/bin $PATH
+
+# latest Ruby version and gems
+fish_add_path /opt/homebrew/opt/ruby/bin
+fish_add_path /opt/homebrew/lib/ruby/gems/3.3.0/bin
