@@ -51,3 +51,6 @@ defaults write NSGlobalDomain com.apple.swipescrolldirection -bool FALSE
 # Dock settings
 defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock tilesize -int 128
+
+# Get back F1 - F12 keys
+defaults write com.apple.keyboard.fnState -bool false
