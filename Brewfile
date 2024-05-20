@@ -2,19 +2,16 @@ tap 'homebrew/bundle'
 
 brew 'jq'
 brew 'vim', args={'--with-lua': true}
-brew 'tree'
 brew 'htop'
 brew 'fzf'
 brew 'fish'
-brew 'git-cola'
+# not using this anymore
+# brew 'git-cola'
 brew 'ripgrep'
 brew 'tmux'
 brew 'bat'
 brew 'rbenv'
 brew 'nvm'
-# it seems that exa is not maintained anymore
-# brew 'exa'
-brew 'bat'
 
 # This doesn't seem to work anymore
 # Brave
@@ -27,12 +24,11 @@ cask 'rambox'
 cask 'anki'
 # change system wide shortcuts
 cask 'karabiner-elements'
-# show some performance indicators
-cask 'iglance'
 # move windows around
 cask 'rectangle'
 # improve alt-tab functionality
-cask 'alt-tab'
+# it got slow with recent OS X version, holding this off for a while
+# cask 'alt-tab'
 cask 'notion'
 # install Python management tool
 cask 'miniconda'

@@ -3,12 +3,10 @@ My dotfiles based on Dotbot.
 # Prerequisites
 - Install Brew by following installation instructions from https://brew.sh/
 
-# Not automated configuration
-1. Iterm2.
-Kudos to those notes on iterm2 configuraiton:
-- http://stratus3d.com/blog/2015/02/28/sync-iterm2-profile-with-dotfiles-repository/
-- https://apple.stackexchange.com/a/111559
-
+# Install
+```sh
+./install
+```
 
 # TODO
 1. Automate OS X defaults:
