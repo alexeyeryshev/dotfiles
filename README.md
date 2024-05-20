@@ -13,9 +13,9 @@ My dotfiles based on Dotbot.
 git submodule update --init --recursive
 ```
 
-2. Install. We need a `sudo` otherwise certain system level configs won't be set.
+2. Install.
 ```sh
-sudo ./install
+./install
 ```
 
 # TODO
