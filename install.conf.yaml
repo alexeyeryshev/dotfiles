@@ -44,7 +44,7 @@
 
 - git:
     ~/.dotbot-git/oh-my-fish:
-        url: git@github.com:oh-my-fish/oh-my-fish.git
+        url: https://github.com/oh-my-fish/oh-my-fish.git
         description: Oh my fish
 
 - shell:
