@@ -5,8 +5,6 @@ brew 'vim', args={'--with-lua': true}
 brew 'htop'
 brew 'fzf'
 brew 'fish'
-# not using this anymore
-# brew 'git-cola'
 brew 'ripgrep'
 brew 'tmux'
 brew 'bat'
