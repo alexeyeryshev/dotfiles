@@ -112,3 +112,8 @@ contains $HOME/dev/personal/flutter/flutter/bin $PATH; or set PATH $HOME/dev/per
 # latest Ruby version and gems
 fish_add_path /opt/homebrew/opt/ruby/bin
 fish_add_path /opt/homebrew/lib/ruby/gems/3.3.0/bin
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+eval /opt/homebrew/Caskroom/miniconda/base/bin/conda "shell.fish" "hook" $argv | source
+# <<< conda initialize <<<
+

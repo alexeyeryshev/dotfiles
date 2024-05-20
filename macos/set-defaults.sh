@@ -46,4 +46,8 @@ defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 defaults write com.apple.universalaccess mouseDriverCursorSize 3.0
 
 # Disable natural-scrolling
-defaults read NSGlobalDomain com.apple.swipescrolldirection -bool FALSE
+defaults write NSGlobalDomain com.apple.swipescrolldirection -bool FALSE
+
+# Dock settings
+defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock tilesize -int 128
