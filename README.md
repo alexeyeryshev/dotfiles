@@ -7,6 +7,7 @@ My dotfiles based on Dotbot.
 # Install
 
 1. Clone this or download to `~/dotfiles`.
+2. Initialize submodules.
 
 ```
 git submodule update --init --recursive
