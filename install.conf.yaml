@@ -74,4 +74,4 @@
 
 # Follow ups
 - shell:
-    - [echo "You're done!", Setup fish as main shell for Iterm2 in Iterm2's settings]
+    - [echo "You're done!", Don't forget to setup Fish as main shell for Iterm2 in Iterm2's settings]
