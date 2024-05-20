@@ -20,7 +20,7 @@
 # Powerline fonts
 - git:
     ~/.dotbot-git/fonts:
-        url: git@github.com:powerline/fonts.git
+        url: https://github.com/powerline/fonts.git
         description: Powerline fonts
 
 - shell:
