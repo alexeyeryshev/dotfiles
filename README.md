@@ -18,7 +18,10 @@ git submodule update --init --recursive
 ./install
 ```
 
-# TODO
+# Known issues
+1. OS X doesn't apply defaults values anymore.
+
+# Todo
 1. Automate Homewbrew install
 2. Set fira code as default in iterm2
 3. Fix Brewfile casks install
