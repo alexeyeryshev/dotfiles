@@ -18,7 +18,9 @@ cask 'brave-browser'
 cask 'iterm2'
 cask 'keeweb'
 cask 'visual-studio-code'
+# An app to unify all your messengers.
 cask 'rambox'
+# Spaced repetition ftw.
 cask 'anki'
 # change system wide shortcuts
 cask 'karabiner-elements'
@@ -32,3 +34,5 @@ cask 'notion'
 cask 'miniconda'
 # Raycast - an alternative command palette
 cask 'raycast'
+# Arc Browser - The browser company
+cask 'arc'
