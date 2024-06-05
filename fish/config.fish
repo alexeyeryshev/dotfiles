@@ -27,7 +27,7 @@ set -g theme_newline_cursor yes
 # abbr
 abbr -a gu "git add -A && git commit -a -m 'update' && git push"
 abbr -a gpf "git push --force-with-lease"
-abbr -a t "tmux"
+abbr -a t "tmux -u"
 abbr -a v "vim"
 abbr -a vv "vim ~/.dotfiles/vim/vimrc.symlink"
 abbr -a p "pbcopy"
