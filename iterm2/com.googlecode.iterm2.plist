@@ -196,7 +196,7 @@
 			<key>Columns</key>
 			<integer>80</integer>
 			<key>Command</key>
-			<string>/opt/homebrew/bin/fish</string>
+			<string>/usr/local/bin/fish</string>
 			<key>Cursor Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -809,7 +809,7 @@
 			<key>Columns</key>
 			<integer>80</integer>
 			<key>Command</key>
-			<string>/opt/homebrew/bin/fish</string>
+			<string>/usr/local/bin/fish</string>
 			<key>Cursor Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -832,8 +832,6 @@
 			<string>Custom Shell</string>
 			<key>Custom Directory</key>
 			<string>No</string>
-			<key>Custom Locale</key>
-			<string>en_US</string>
 			<key>Default Bookmark</key>
 			<string>No</string>
 			<key>Description</key>
