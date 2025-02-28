@@ -110,8 +110,8 @@ end
 contains $HOME/dev/personal/flutter/flutter/bin $PATH; or set PATH $HOME/dev/personal/flutter/flutter/bin $PATH
 
 # latest Ruby version and gems
-fish_add_path /opt/homebrew/opt/ruby/bin
-fish_add_path /opt/homebrew/lib/ruby/gems/3.3.0/bin
+# fish_add_path /opt/homebrew/opt/ruby/bin
+# fish_add_path /opt/homebrew/lib/ruby/gems/3.3.0/bin
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
