@@ -50,9 +50,9 @@
 - shell:
     - [cd ~/.dotbot-git/oh-my-fish && bin/install --offline --yes --noninteractive, Install Oh My Fish]
 
-# Conda
-- shell:
-    - [conda init fish, Init conda for fish]
+# # Conda
+# - shell:
+#     - [conda init fish, Init conda for fish]
 
 # Karabiner elements config
 # Karabiner doesn't like direct linking of config file, instead we should symlink a directory
