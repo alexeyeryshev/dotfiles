@@ -27,19 +27,19 @@ set -g theme_newline_cursor yes
 # abbr
 abbr -a gu "git add -A && git commit -a -m 'update' && git push"
 abbr -a gpf "git push --force-with-lease"
-abbr -a t "tmux -u"
+abbr -a tm "tmux -u"
 abbr -a v "vim"
 abbr -a vv "vim ~/.dotfiles/vim/vimrc.symlink"
 abbr -a p "pbcopy"
 abbr -a dc "docker compose"
-abbr -a cat "bat"
+# abbr -a cat "bat"
 # abbr -a ll "exa"
 # abbr -a ls "exa"
-abbr -a l "exa"
+# abbr -a l "exa"
 abbr -a sizes "du -h -a | sort -k1 -rh"
 # abbr -a gcam "git commit -a -m --no-edit"
-abbr -a kali "docker run -ti -v (pwd):/app -w /app --name=kali --rm  --security-opt 'seccomp=unconfined' --cap-add=SYS_PTRACE kali /usr/bin/zsh"
-abbr -a la "exa -la"
+# abbr -a kali "docker run -ti -v (pwd):/app -w /app --name=kali --rm  --security-opt 'seccomp=unconfined' --cap-add=SYS_PTRACE kali /usr/bin/zsh"
+# abbr -a la "exa -la"
 abbr -a gfu "git branch --set-upstream-to=origin/$(git rev-parse --abbrev-ref HEAD)"
 abbr -a gprpf "git pull --rebase && git push --force-with-lease"
 abbr -a gcs "gh copilot suggest"
@@ -91,38 +91,5 @@ if test (which rbenv)
 end
 
 # add brew to fish path if it's not there
-for bindir in /usr/local/bin /opt/homebrew/bin
-    if test -d $bindir; and not contains $bindir $PATH
-      fish_add_path -p $bindir
-      eval (brew shellenv)
-    end
-end
-contains $HOME/.local/bin $PATH; or set PATH $HOME/.local/bin $PATH
-
-# custom conda initialization
-for conda_bin in /opt/homebrew/Caskroom/miniconda/base/bin/conda /usr/local/Caskroom/miniconda/base/bin/conda
-    if test -f $conda_bin
-      eval $conda_bin "shell.fish" "hook" | source
-    end
-end
-
-# flutter
-contains $HOME/dev/personal/flutter/flutter/bin $PATH; or set PATH $HOME/dev/personal/flutter/flutter/bin $PATH
-
-# latest Ruby version and gems
-# fish_add_path /opt/homebrew/opt/ruby/bin
-# fish_add_path /opt/homebrew/lib/ruby/gems/3.3.0/bin
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-if test -f /opt/homebrew/Caskroom/miniconda/base/bin/conda
-    eval /opt/homebrew/Caskroom/miniconda/base/bin/conda "shell.fish" "hook" $argv | source
-else
-    if test -f "/opt/homebrew/Caskroom/miniconda/base/etc/fish/conf.d/conda.fish"
-        . "/opt/homebrew/Caskroom/miniconda/base/etc/fish/conf.d/conda.fish"
-    else
-        set -x PATH "/opt/homebrew/Caskroom/miniconda/base/bin" $PATH
-    end
-end
-# <<< conda initialize <<<
-
+fish_add_path $HOME/homebrew/bin
+fish_add_path $HOME/homebrew/sbin
