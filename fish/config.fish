@@ -44,6 +44,9 @@ abbr -a gfu "git branch --set-upstream-to=origin/$(git rev-parse --abbrev-ref HE
 abbr -a gprpf "git pull --rebase && git push --force-with-lease"
 abbr -a gcs "gh copilot suggest"
 abbr -a gce "gh copilot explain"
+abbr -a k "kubectl"
+abbr -a kc "kubectx"
+
 
 function fkill -d "Kill processes with fzf"
   eval "ps aux | grep $USER | fzf --header (ps aux | head -1) --query (commandline)" | read select
