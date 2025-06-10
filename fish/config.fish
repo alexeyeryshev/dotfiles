@@ -93,3 +93,4 @@ end
 # add brew to fish path if it's not there
 fish_add_path $HOME/homebrew/bin
 fish_add_path $HOME/homebrew/sbin
+fish_add_path /opt/homebrew/bin
