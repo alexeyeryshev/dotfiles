@@ -1,5 +1,3 @@
-tap 'homebrew/bundle'
-
 brew 'jq'
 brew 'vim', args={'--with-lua': true}
 brew 'htop'
@@ -30,9 +28,5 @@ cask 'rectangle'
 # it got slow with recent OS X version, holding this off for a while
 # cask 'alt-tab'
 # cask 'notion'
-# install Python management tool
-# cask 'miniconda'
 # Raycast - an alternative command palette
 cask 'raycast'
-# Arc Browser - The browser company
-# cask 'arc'
