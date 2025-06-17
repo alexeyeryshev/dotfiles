@@ -27,25 +27,17 @@ set -g theme_newline_cursor yes
 # abbr
 abbr -a gu "git add -A && git commit -a -m 'update' && git push"
 abbr -a gpf "git push --force-with-lease"
+
 abbr -a tm "tmux -u"
 abbr -a v "vim"
 abbr -a vv "vim ~/.dotfiles/vim/vimrc.symlink"
 abbr -a p "pbcopy"
 abbr -a dc "docker compose"
-# abbr -a cat "bat"
-# abbr -a ll "exa"
-# abbr -a ls "exa"
-# abbr -a l "exa"
 abbr -a sizes "du -h -a | sort -k1 -rh"
-# abbr -a gcam "git commit -a -m --no-edit"
-# abbr -a kali "docker run -ti -v (pwd):/app -w /app --name=kali --rm  --security-opt 'seccomp=unconfined' --cap-add=SYS_PTRACE kali /usr/bin/zsh"
-# abbr -a la "exa -la"
-abbr -a gfu "git branch --set-upstream-to=origin/$(git rev-parse --abbrev-ref HEAD)"
-abbr -a gprpf "git pull --rebase && git push --force-with-lease"
-abbr -a gcs "gh copilot suggest"
-abbr -a gce "gh copilot explain"
+
 abbr -a k "kubectl"
 abbr -a kc "kubectx"
+abbr -a gt "gt='git for-each-ref --sort=creatordate --format '\''%(refname) %(creatordate)'\'' refs/tags | sed '\''s/refs\/tags\///'\'' | tail'"
 
 
 function fkill -d "Kill processes with fzf"
@@ -86,6 +78,17 @@ function gpr
   eval $cmd
 end
 
+
+function ve
+    set venv_dir (find . -type d -name "*venv*" | head -n 1)
+    if test -n "$venv_dir"
+        source "$venv_dir/bin/activate.fish"
+        echo "Activated virtual environment at $venv_dir"
+    else
+        echo "No virtual environment directory found."
+    end
+end
+
 ############### Tools ################
 
 # activate rbenv
@@ -97,3 +100,6 @@ end
 fish_add_path $HOME/homebrew/bin
 fish_add_path $HOME/homebrew/sbin
 fish_add_path /opt/homebrew/bin
+
+# activate uv
+source $HOME/.local/bin/env.fish
