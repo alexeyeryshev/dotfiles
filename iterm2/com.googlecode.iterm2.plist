@@ -10,8 +10,16 @@
 	<string>5D7A0E1A-C9AD-4150-B4C5-47FEDED3226C</string>
 	<key>HapticFeedbackForEsc</key>
 	<false/>
+	<key>Hotkey</key>
+	<true/>
+	<key>HotkeyChar</key>
+	<integer>92</integer>
+	<key>HotkeyCode</key>
+	<integer>42</integer>
 	<key>HotkeyMigratedFromSingleToMulti</key>
 	<true/>
+	<key>HotkeyModifiers</key>
+	<integer>270592</integer>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -2024,6 +2032,8 @@
 	<false/>
 	<key>TabStyleWithAutomaticOption</key>
 	<integer>5</integer>
+	<key>TmuxSyncClipboard</key>
+	<true/>
 	<key>VisualIndicatorForEsc</key>
 	<false/>
 	<key>findMode_iTerm</key>
