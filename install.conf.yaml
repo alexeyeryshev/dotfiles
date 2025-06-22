@@ -27,32 +27,49 @@
   - [cd ~/.dotbot-git/fonts && ./install.sh, "Install Powerline fonts"]
 
 # Install Fish and Oh My Fish
-# Fish and Oh My Fish depends on Conda and Java
+
 - link:
     ~/.config/fish/config.fish:
       path: fish/config.fish
       force: true
       create: true
-    ~/.config/fish/functions/fzf_key_bindings.fish:
-      path: fish/functions/fzf_key_bindings.fish
-      create: true
-      glob: true
-    ~/.config/omf:
-      path: omf
-    ~/.ideavimrc:
-      path: idea/.ideavimrc
+#     ~/.config/fish/functions/fzf_key_bindings.fish:
+#       path: fish/functions/fzf_key_bindings.fish
+#       create: true
+#       glob: true
+#     ~/.config/omf:
+#       path: omf
+#     ~/.ideavimrc:
+#       path: idea/.ideavimrc
 
-- git:
-    ~/.dotbot-git/oh-my-fish:
-        url: https://github.com/oh-my-fish/oh-my-fish.git
-        description: Oh my fish
+# - git:
+#     ~/.dotbot-git/oh-my-fish:
+#         url: https://github.com/oh-my-fish/oh-my-fish.git
+#         description: Oh my fish
 
-- shell:
-    - [cd ~/.dotbot-git/oh-my-fish && bin/install --offline --yes --noninteractive, Install Oh My Fish]
-
-# # Conda
 # - shell:
-#     - [conda init fish, Init conda for fish]
+#     - [cd ~/.dotbot-git/oh-my-fish && bin/install --offline --yes --noninteractive, Install Oh My Fish]
+
+# Install Zsh and Oh My Zsh
+- shell:
+  - [cp ~/.zshrc ~/.zshrc.bak, Backup existing .zshrc]
+- link:
+    ~/.zshrc:
+      path: zsh/.zshrc
+      force: true
+
+## Oh My Zsh
+- shell:
+  - [rm -rf ~/.oh-my-zsh, Remove Oh My Zsh]
+- git:
+    ~/.oh-my-zsh:
+        url: https://github.com/ohmyzsh/ohmyzsh.git
+        description: Install Oh My Zsh
+- link:
+    ~/.oh-my-zsh/custom:
+      path: zsh/custom
+      force: true
+
 
 # Karabiner elements config
 # Karabiner doesn't like direct linking of config file, instead we should symlink a directory
