@@ -55,7 +55,10 @@
   - [cp ~/.zshrc ~/.zshrc.bak, Backup existing .zshrc]
 - link:
     ~/.zshrc:
-      path: zsh/.zshrc
+      path: zsh/.zshrc.oh-my-zsh
+      force: true
+    ~/.zshrc.custom:
+      path: zsh/.zshrc.custom
       force: true
 
 ## Oh My Zsh
@@ -64,10 +67,13 @@
 - git:
     ~/.oh-my-zsh:
         url: https://github.com/ohmyzsh/ohmyzsh.git
-        description: Install Oh My Zsh
+        description: Oh My Zsh
+- git:
+    ~/.config/oh-my-zsh/custom/plugins/zsh-syntax-highlighting:
+        url: https://github.com/zsh-users/zsh-syntax-highlighting.git
 - link:
-    ~/.config/oh-my-zsh/custom:
-      path: zsh/custom
+    ~/.config/oh-my-zsh/custom/aliases.zsh:
+      path: zsh/custom/aliases.zsh
       create: true
       force: true
 

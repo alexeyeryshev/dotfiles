@@ -11,6 +11,9 @@ brew 'htop'
 brew 'jq'
 brew 'nvm'
 
+## Zsh
+brew 'zsh-syntax-highlighting'
+
 # Must casks
 # change system wide shortcuts
 cask 'karabiner-elements'
