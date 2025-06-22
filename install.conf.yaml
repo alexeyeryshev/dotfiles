@@ -66,8 +66,9 @@
         url: https://github.com/ohmyzsh/ohmyzsh.git
         description: Install Oh My Zsh
 - link:
-    ~/.oh-my-zsh/custom:
+    ~/.config/oh-my-zsh/custom:
       path: zsh/custom
+      create: true
       force: true
 
 
