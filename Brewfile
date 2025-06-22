@@ -19,6 +19,7 @@ brew 'zsh-syntax-highlighting'
 cask 'karabiner-elements'
 cask 'rectangle'
 cask 'iterm2'
+cask 'warp'
 
 # Other tools
 cask 'keeweb'
