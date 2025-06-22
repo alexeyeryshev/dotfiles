@@ -1,0 +1,5 @@
+
+# Utilities
+gu () {
+  git add --all && git commit -am "$argv[1]" && git push
+}
