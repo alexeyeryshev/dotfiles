@@ -3,6 +3,10 @@ if test -f ~/.config/fish/functions/proprietary_config.fish
   proprietary_config
 end
 
+# home bin directory
+mkdir -p $HOME/.local/bin
+fish_add_path $HOME/.local/bin
+
 # mix emacs and vim keybindings
 fish_hybrid_key_bindings
 
@@ -37,8 +41,14 @@ abbr -a sizes "du -h -a | sort -k1 -rh"
 
 abbr -a k "kubectl"
 abbr -a kc "kubectx"
-abbr -a gt "gt='git for-each-ref --sort=creatordate --format '\''%(refname) %(creatordate)'\'' refs/tags | sed '\''s/refs\/tags\///'\'' | tail'"
 
+function gt
+  set -l count $argv[1]
+  if test -z "$count"
+    set count 10
+  end
+  git for-each-ref --sort=creatordate --format '%(refname) %(creatordate)' refs/tags | sed 's/refs\/tags\///' | tail -n $count
+end
 
 function fkill -d "Kill processes with fzf"
   eval "ps aux | grep $USER | fzf --header (ps aux | head -1) --query (commandline)" | read select
@@ -72,11 +82,11 @@ function upp --description 'Get the path of an ancestor directory'
     realpath $pathname
 end
 
-function gpr
-  set cmd "git add --all && git commit -am '$argv[1]' && git push"
-  echo $cmd
-  eval $cmd
-end
+# function gpr
+#   set cmd "git add --all && git commit -am '$argv[1]' && git push"
+#   echo $cmd
+#   eval $cmd
+# end
 
 
 function ve
