@@ -1,3 +1,7 @@
+# Proprieatry config
+if [ -f ~/.zshrc.custom.proprietary ]; then
+  source ~/.zshrc.custom.proprietary
+fi
 
 # Utilities
 gu () {
