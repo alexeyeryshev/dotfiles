@@ -71,6 +71,7 @@ ZSH_CUSTOM=~/.config/oh-my-zsh/custom
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  vi-mode
   git
   z
   fzf
@@ -78,6 +79,18 @@ plugins=(
   zsh-autosuggestions
   kubectl
 )
+
+if [[ $TERM_PROGRAM == "WarpTerminal" ]]; then
+##### WHAT YOU WANT TO DISABLE FOR WARP - BELOW
+# Unsupported plugin/prompt code here
+plugins=(
+  z
+  git
+  kubectl
+)
+##### WHAT YOU WANT TO DISABLE FOR WARP - ABOVE
+fi
+ 
 
 source $ZSH/oh-my-zsh.sh
 

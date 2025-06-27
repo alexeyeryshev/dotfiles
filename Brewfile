@@ -9,6 +9,7 @@ brew 'vim', args={'--with-lua': true}
 brew 'tmux'
 brew 'htop'
 brew 'jq'
+brew 'yq'
 brew 'nvm'
 
 ## Zsh
