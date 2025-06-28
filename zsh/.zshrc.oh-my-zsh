@@ -78,6 +78,7 @@ plugins=(
   zsh-syntax-highlighting
   zsh-autosuggestions
   kubectl
+  nvm
 )
 
 if [[ $TERM_PROGRAM == "WarpTerminal" ]]; then
@@ -87,6 +88,7 @@ plugins=(
   z
   git
   kubectl
+  nvm
 )
 ##### WHAT YOU WANT TO DISABLE FOR WARP - ABOVE
 fi
