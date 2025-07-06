@@ -79,6 +79,7 @@ plugins=(
   zsh-autosuggestions
   kubectl
   nvm
+  dotenv
 )
 
 if [[ $TERM_PROGRAM == "WarpTerminal" ]]; then
@@ -89,6 +90,7 @@ plugins=(
   git
   kubectl
   nvm
+  dotenv
 )
 ##### WHAT YOU WANT TO DISABLE FOR WARP - ABOVE
 fi

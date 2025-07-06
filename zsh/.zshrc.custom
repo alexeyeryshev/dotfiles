@@ -1,3 +1,5 @@
+export EDITOR=vim
+
 # Proprieatry config
 if [ -f ~/.zshrc.custom.proprietary ]; then
   source ~/.zshrc.custom.proprietary
@@ -6,13 +8,4 @@ fi
 # Utilities
 gu () {
   git add --all && git commit -am "$argv[1]" && git push
-}
-
-# Activate venv on cd
-function chpwd() {
-    if [ -d ".venv" ]; then
-        if [ -f ".venv/bin/activate" ]; then
-            source ".venv/bin/activate"
-        fi
-    fi
 }
