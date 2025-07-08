@@ -1,0 +1,63 @@
+[core]
+	# Make `git rebase` safer on OS X
+	# More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
+	trustctime = false
+	editor = vim
+
+[color "branch"]
+
+	current = yellow reverse
+	local = yellow
+	remote = green
+
+[color "diff"]
+
+	meta = yellow bold
+	frag = magenta bold # line info
+	old = red # deletions
+	new = green # additions
+
+[color "status"]
+
+	added = yellow
+	changed = green
+	untracked = cyan
+
+[diff]
+
+	# Detect copies as well as renames
+	renames = copies
+
+[help]
+
+	# Automatically correct and execute mistyped commands
+	autocorrect = 1
+
+[merge]
+
+	# Include summaries of merged commits in newly created merge commit messages
+	log = true
+
+[push]
+	# change to maching for machines with older versions of git 1.x.x
+	default = simple
+	autoSetupRemote = true
+
+# [commit]
+# 	gpgsign = true
+[pull]
+	rebase = true
+[user]
+	name = alexeyeryshev
+	email = a.a.eryshev@gmail.com
+	# signingkey = 18F3685C0022BFF3
+[github]
+	user = alexeyeryshev
+# Fixme: learn about this
+# [filter "lfs"]
+# 	clean = git-lfs clean -- %f
+# 	smudge = git-lfs smudge -- %f
+# 	process = git-lfs filter-process
+# 	required = true
+[init]
+	defaultBranch = main

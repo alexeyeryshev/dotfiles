@@ -21,6 +21,7 @@ cask 'karabiner-elements'
 cask 'rectangle'
 cask 'iterm2'
 cask 'warp'
+cask 'cursor'
 
 # Other tools
 cask 'keeweb'
@@ -30,6 +31,9 @@ cask 'anki'
 cask 'notion'
 # Raycast - an alternative command palette
 cask 'raycast'
+
+# Experiments
+cask 'arc'
 
 # Graveyard
 # improve alt-tab functionality

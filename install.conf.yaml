@@ -17,6 +17,13 @@
 - brewfile:
     - Brewfile
 
+# Git 
+- link:
+    ~/.gitconfig:
+      path: .gitconfig
+      force: true
+      create: true
+
 # Powerline fonts
 - git:
     ~/.dotbot-git/fonts:
@@ -28,11 +35,11 @@
 
 # Install Fish and Oh My Fish
 
-- link:
-    ~/.config/fish/config.fish:
-      path: fish/config.fish
-      force: true
-      create: true
+# - link:
+#     ~/.config/fish/config.fish:
+#       path: fish/config.fish
+#       force: true
+#       create: true
 #     ~/.config/fish/functions/fzf_key_bindings.fish:
 #       path: fish/functions/fzf_key_bindings.fish
 #       create: true
