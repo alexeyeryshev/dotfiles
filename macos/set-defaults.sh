@@ -1,6 +1,7 @@
 # This script supposed to set up macOS defaults.
 # But it doesn't not really work.
 # I used it as a notebook to set up defaults.
+# https://macos-defaults.com/
 
 # Disable press-and-hold for keys in favor of key repeat.
 defaults write -g ApplePressAndHoldEnabled -bool false
@@ -33,3 +34,7 @@ defaults write com.apple.dock tilesize -int 128
 # Get back F1 - F12 keys
 # Settings > Keyboard > F1, F2, etc. keys: Show F1, F2, etc. keys
 defaults write com.apple.keyboard.fnState -bool false
+
+# Delete press-and-hold setting
+# this is useful for vim and other text editors
+defaults delete -g ApplePressAndHoldEnabledefaults delete -g ApplePressAndHoldEnabledd
