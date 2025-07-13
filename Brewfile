@@ -17,6 +17,7 @@ brew 'zsh-syntax-highlighting'
 
 # Must casks
 # change system wide shortcuts
+cask 'brave-browser'
 cask 'karabiner-elements'
 cask 'rectangle'
 cask 'iterm2'
