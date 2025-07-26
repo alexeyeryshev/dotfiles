@@ -9,3 +9,11 @@ fi
 gu () {
   git add --all && git commit -am "$argv[1]" && git push
 }
+
+# pnpm
+export PNPM_HOME="/Users/alexey/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
