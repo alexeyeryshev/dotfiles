@@ -17,3 +17,20 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+source_env () {
+  set -a
+  source .env
+  set +a
+}
+
+# Pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
+
+# Java
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+
+# Git spice
+eval "$(gs shell completion zsh)"
