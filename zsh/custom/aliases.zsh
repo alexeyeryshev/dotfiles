@@ -6,3 +6,5 @@ alias gcm='git commit -m'
 alias up="cd .."
 alias up2="cd ../.."
 alias up3="cd ../../.."
+
+alias kc="kubectx"
