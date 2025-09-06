@@ -34,9 +34,10 @@ cask 'notion'
 cask 'raycast'
 
 # Experiments
-cask 'arc'
+brew 'git-spice'
 
 # Graveyard
 # improve alt-tab functionality
 # it got slow with recent OS X version, holding this off for a while
 # cask 'alt-tab'
+# cask 'arc'

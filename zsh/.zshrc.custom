@@ -10,6 +10,12 @@ gu () {
   git add --all && git commit -am "$argv[1]" && git push
 }
 
+source_env () {
+  set -a
+  source .env
+  set +a
+}
+
 # pnpm
 export PNPM_HOME="${HOME}/Library/pnpm"
 case ":$PATH:" in
@@ -18,16 +24,8 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-source_env () {
-  set -a
-  source .env
-  set +a
-}
-
-# Pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - zsh)"
+# UV managed
+export PATH="$HOME/.local/bin:$PATH"
 
 # Java
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
