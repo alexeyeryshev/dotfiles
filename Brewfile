@@ -11,6 +11,7 @@ brew 'htop'
 brew 'jq'
 brew 'yq'
 brew 'nvm'
+brew 'pyenv'
 
 ## Zsh
 brew 'zsh-syntax-highlighting'

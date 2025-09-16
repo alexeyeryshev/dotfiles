@@ -32,3 +32,8 @@ export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 
 # Git spice
 eval "$(gs shell completion zsh)"
+
+# Pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
