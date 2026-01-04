@@ -128,3 +128,4 @@ source $ZSH/oh-my-zsh.sh
 if [ -f ~/.zshrc.custom ]; then
   source ~/.zshrc.custom
 fi
+fpath+=~/.zfunc; autoload -Uz compinit; compinit
