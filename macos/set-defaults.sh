@@ -29,12 +29,12 @@ defaults write NSGlobalDomain com.apple.swipescrolldirection -bool FALSE
 # Dock settings
 # Settings > Dock > Automatically hide and show the Dock: On
 defaults write com.apple.dock autohide -bool true
-# Settings > Dock > Size: 128
-defaults write com.apple.dock tilesize -int 128
+# Settings > Dock > Size: 72
+defaults write com.apple.dock tilesize -int 72
 
 # Get back F1 - F12 keys
 # Settings > Keyboard > F1, F2, etc. keys: Show F1, F2, etc. keys
-defaults write -g com.apple.keyboard.fnState -bool false
+defaults write -g com.apple.keyboard.fnState -bool true
 
 # Apply changes that only need an app restart.
 killall Finder Dock 2>/dev/null || true
