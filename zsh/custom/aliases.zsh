@@ -11,3 +11,4 @@ alias ghw='gh run watch $(gh run list --limit 1 --json databaseId -u alexeyerysh
 alias ghpw='gh pr view'
 alias gt='git for-each-ref --sort=creatordate --format '\''%(refname) %(creatordate)'\'' refs/tags | sed '\''s/refs\/tags\///'\'' | tail'
 alias gcm='git commit -m'
+alias gup='gfa && grb origin/main'
