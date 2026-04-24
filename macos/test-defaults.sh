@@ -21,8 +21,8 @@ read_default() {
 echo "Checking macOS defaults..."
 
 check "global ApplePressAndHoldEnabled"      "0"    "$(read_default -g ApplePressAndHoldEnabled)"
-check "global KeyRepeat"                     "1"    "$(read_default -g KeyRepeat)"
-check "global InitialKeyRepeat"              "1"    "$(read_default -g InitialKeyRepeat)"
+check "global KeyRepeat"                     "2"    "$(read_default -g KeyRepeat)"
+check "global InitialKeyRepeat"              "15"   "$(read_default -g InitialKeyRepeat)"
 check "global swipescrolldirection"          "0"    "$(read_default -g com.apple.swipescrolldirection)"
 check "global keyboard.fnState"              "0"    "$(read_default -g com.apple.keyboard.fnState)"
 check "NetworkBrowser BrowseAllInterfaces"   "1"    "$(read_default com.apple.NetworkBrowser BrowseAllInterfaces)"
@@ -43,7 +43,6 @@ if [ "$fail" -eq 0 ]; then
   echo "All checks passed."
 else
   echo "Some checks failed. Re-run macos/set-defaults.sh and log out/in."
-  echo "Note: opening System Settings > Keyboard can revert KeyRepeat/InitialKeyRepeat to UI minimums (2/15)."
 fi
 
 exit "$fail"

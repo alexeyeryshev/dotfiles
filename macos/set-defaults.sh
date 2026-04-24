@@ -16,11 +16,11 @@ defaults write com.apple.Finder FXPreferredViewStyle Nlsv
 # Show the ~/Library folder.
 chflags nohidden ~/Library
 
-# Set a really fast key repeat.
+# Set a fast key repeat (UI slider minimums, stable across System Settings).
 # Settings > Keyboard > Key Repeat Rate
-defaults write NSGlobalDomain KeyRepeat -int 1
+defaults write NSGlobalDomain KeyRepeat -int 2
 # Settings > Keyboard > Delay Until Repeat
-defaults write NSGlobalDomain InitialKeyRepeat -int 1
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
 # Disable natural-scrolling
 # Settings > Trackpad > Scroll & Zoom > Scroll direction: Natural Off
