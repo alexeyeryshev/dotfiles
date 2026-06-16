@@ -5,6 +5,7 @@ alias up2="cd ../.."
 alias up3="cd ../../.."
 
 alias kc="kubectx"
+alias kns="kubens"
 
 # Git
 alias ghw='gh run watch $(gh run list --limit 1 --json databaseId -u alexeyeryshev --jq ".[0].databaseId")'
