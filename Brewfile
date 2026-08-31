@@ -33,6 +33,8 @@ cask 'anki'
 cask 'notion'
 # Raycast - an alternative command palette
 cask 'raycast'
+# Shows the next meeting in the menu bar
+cask 'meetingbar'
 
 # Experiments
 brew 'git-spice'
