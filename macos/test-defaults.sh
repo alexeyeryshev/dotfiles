@@ -39,6 +39,21 @@ else
 fi
 
 echo ""
+echo "Checking screen lock..."
+
+batt_ds=$(pmset -g custom | sed -n '/^Battery Power/,/^AC Power/p' | awk '/displaysleep/{print $2}')
+ac_ds=$(pmset -g custom | sed -n '/^AC Power/,$p' | awk '/displaysleep/{print $2}')
+
+check "displaysleep on battery (min)"        "2"    "$batt_ds"
+check "displaysleep on AC (min)"             "5"    "$ac_ds"
+
+# Informational: these have no stable machine-readable value to assert against.
+printf "  info %-45s = %s\n" "screen lock delay" \
+  "$(sysadminctl -screenLock status 2>&1 | tail -1)"
+printf "  info %-45s = %s\n" "screensaver idleTime (want 120)" \
+  "$(defaults -currentHost read com.apple.screensaver idleTime 2>/dev/null || echo '<unset>')"
+
+echo ""
 if [ "$fail" -eq 0 ]; then
   echo "All checks passed."
 else
