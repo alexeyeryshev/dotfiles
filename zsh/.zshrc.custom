@@ -41,3 +41,10 @@ export GPG_TTY=$(tty)
 _secretive_sock="$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh"
 [ -S "$_secretive_sock" ] && export SSH_AUTH_SOCK="$_secretive_sock"
 unset _secretive_sock
+
+# Warp tab title. Warp seeds ZSH_THEME_TERM_TITLE_IDLE="%~" before it sources
+# ~/.zshrc, then oh-my-zsh's termsupport overwrites it with "%n@%m:%~", putting
+# user@host in every tab -- a constant that never changes, and long enough that
+# Warp's 25-char truncation then eats the front of the path. Put it back. Warp
+# uses a separate variable over SSH, so the host still shows where it matters.
+ZSH_THEME_TERM_TITLE_IDLE="%~"
