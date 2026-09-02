@@ -19,18 +19,19 @@ alone. Run it all in one terminal session — `$KEYDIR` does not survive a new
 window.
 
 ```sh
+GITHUB_USER=your-github-username
 KEYDIR=$(mktemp -d)
 ssh-keygen -t ed25519 -f "$KEYDIR/bootstrap" -N "" -C "throwaway $(date +%F)"
 pbcopy < "$KEYDIR/bootstrap.pub"
 ```
 
-Paste it at `github.com/alexeyeryshev/dotfiles/settings/keys` → **Add deploy
+Paste it at `github.com/$GITHUB_USER/dotfiles/settings/keys` → **Add deploy
 key**, leaving **Allow write access** unchecked.
 
 ```sh
 # -F /dev/null ignores ~/.ssh/config, IdentitiesOnly stops ssh offering anything else
 GIT_SSH_COMMAND="ssh -F /dev/null -i $KEYDIR/bootstrap -o IdentitiesOnly=yes" \
-  git clone git@github.com:alexeyeryshev/dotfiles.git ~/dotfiles
+  git clone "git@github.com:$GITHUB_USER/dotfiles.git" ~/dotfiles
 
 cd ~/dotfiles && git submodule update --init --recursive
 ```
@@ -45,7 +46,7 @@ curl -s https://api.github.com/meta | python3 -c 'import sys,json;print(json.loa
 ```
 
 Or skip the key entirely: `gh auth login` then `gh repo clone
-alexeyeryshev/dotfiles ~/dotfiles` leaves nothing on disk to clean up.
+$GITHUB_USER/dotfiles ~/dotfiles` leaves nothing on disk to clean up.
 
 ### 3. Install
 
