@@ -43,24 +43,37 @@
 	default = simple
 	autoSetupRemote = true
 
-# SSH commit signing, backed by the Secure Enclave key held in Secretive.
+# SSH commit signing, backed by a Secure Enclave key held in Secretive.
 #
-# defaultKeyCommand resolves the key from the agent at signing time, so no
-# machine-specific key identity lives here and this works unchanged on a new
-# machine holding a different key. Nothing needs provisioning after install.
+# Two Secretive keys, deliberately:
 #
-# Two non-obvious things about the command below, both load-bearing:
+#   - the default key, created with "Require Authentication", used for SSH auth
+#     to GitHub. ControlMaster in ssh/config amortises it to roughly one Touch
+#     ID per work session.
 #
-#   1. It is wrapped in `sh -c`. Git does NOT run defaultKeyCommand through a
-#      shell -- it splits the string into argv and execs it directly -- so a
-#      bare `ssh-add -L | sed ...` hands sed's arguments to ssh-add, which
-#      dies with "invalid option -- n".
+#   - a second key named `git-signing`, created with "Notify", used only for
+#     commit signatures. Signing hits the Secure Enclave once per commit and
+#     ControlMaster cannot amortise it the way it does for connections, so an
+#     authentication-required key means a Touch ID tap on literally every
+#     commit. "Notify" trades the per-signature consent prompt for a
+#     notification. The key is still non-extractable either way.
 #
-#   2. The output is prefixed with `key::`. Git accepts a literal key here only
-#      if it starts with `ssh-` or `key::` (is_literal_ssh_key in
-#      gpg-interface.c). Secure Enclave keys are NIST P-256, so they start with
-#      `ecdsa-` and are silently rejected without the prefix: git warns
-#      "defaultKeyCommand succeeded but returned no keys" and the commit fails.
+# user.signingKey points at a public key FILE rather than a literal key, which
+# is what the Secretive maintainer recommends (maxgoedjen/secretive#262). Git
+# hands the file to ssh-keygen, which finds the matching private key in the
+# agent. Two Secure Enclave keys are otherwise indistinguishable from outside
+# the agent -- it exposes no metadata beyond the comment, and its ordering is
+# not stable -- so selecting by file is the only unambiguous option.
+#
+# NOTE: a literal key here would need a `key::` prefix, because git only
+# accepts a literal if it starts with `ssh-` or `key::` (is_literal_ssh_key in
+# gpg-interface.c) and Secure Enclave keys are P-256, starting with `ecdsa-`.
+# The file form sidesteps that entirely.
+#
+# NOTE: this file must exist or commits fail. `install` provisions it. To
+# recreate by hand, with Secretive running:
+#
+#     ssh-add -L | grep git-signing > ~/.ssh/git-signing.pub
 #
 # gpg.ssh.allowedSignersFile is deliberately NOT set. Per git's gpg-interface,
 # it is read only by the verify path (ssh-keygen -Y find-principals / verify);
@@ -68,14 +81,11 @@
 # side against the Signing Key on the account. The only thing given up is local
 # `git log --show-signature`, which will report signatures as unverified.
 #
-# NOTE: with gpgsign on, `git commit` fails until the agent holds a key.
-# NOTE: the public key must ALSO be registered on GitHub as a *Signing* key.
-# That list is separate from Authentication keys, and a key present only in the
+# NOTE: the signing key must be registered on GitHub as a *Signing* key. That
+# list is separate from Authentication keys, and a key present only in the
 # Authentication list produces valid signatures with no Verified badge.
 [gpg]
 	format = ssh
-[gpg "ssh"]
-	defaultKeyCommand = sh -c 'ssh-add -L | sed -n 1s/^/key::/p'
 [commit]
 	gpgsign = true
 [tag]
@@ -85,6 +95,7 @@
 [user]
 	name = alexeyeryshev
 	email = a.a.eryshev@gmail.com
+	signingKey = ~/.ssh/git-signing.pub
 	# signingkey = 18F3685C0022BFF3
 [github]
 	user = alexeyeryshev

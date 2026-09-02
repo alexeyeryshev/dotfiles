@@ -98,17 +98,49 @@
       stdout: true
       stderr: true
 
+# Commit signing key
+# Best-effort: Secretive keys cannot exist before the app has been launched and
+# keys created, so this provisions ~/.ssh/git-signing.pub only when the agent
+# already holds a key named `git-signing`. The follow-up notes cover doing it by
+# hand on a fresh machine.
+# It writes only on a successful match -- a bare `grep > file` would leave an
+# empty file behind, which git reports as a confusing signing failure.
+- shell:
+    - command: |
+        if K=$(ssh-add -L 2>/dev/null | grep -m1 git-signing); then
+          printf '%s\n' "$K" > ~/.ssh/git-signing.pub
+          chmod 600 ~/.ssh/git-signing.pub
+          echo "  provisioned ~/.ssh/git-signing.pub"
+        else
+          echo "  no 'git-signing' key in the agent yet -- see next steps"
+        fi
+      description: Provision the commit signing public key
+      stdout: true
+
 # Follow ups
 - shell:
     - command: |
         echo ""
-        echo "  Commit signing is ON, so 'git commit' fails until the agent"
-        echo "  holds a key. To finish:"
-        echo "    1. open Secretive, allow notifications"
-        echo "    2. create an ECDSA-256 key, auth required before each use"
-        echo "    3. add its public key to GitHub TWICE --"
-        echo "       once as an Authentication Key, once as a Signing Key"
-        echo "    4. open a new shell, then: ssh -T git@github.com"
+        echo "  Commit signing is ON, so 'git commit' fails until"
+        echo "  ~/.ssh/git-signing.pub exists. Two keys are needed."
+        echo ""
+        echo "  In Secretive (allow notifications when asked):"
+        echo "    1. create a key, 'Require Authentication'. This is the"
+        echo "       SSH auth key. Add it to GitHub as an AUTHENTICATION key."
+        echo "    2. create a second key named exactly 'git-signing', with"
+        echo "       'Notify' instead of 'Require Authentication'. Add it to"
+        echo "       GitHub as a SIGNING key -- a list separate from"
+        echo "       Authentication keys, and a key in only the latter signs"
+        echo "       fine but never shows a Verified badge."
+        echo ""
+        echo "  Two keys because signing hits the Secure Enclave once per"
+        echo "  commit, and ControlMaster cannot amortise that the way it"
+        echo "  does for pushes. One auth-required key means a Touch ID tap"
+        echo "  on every single commit."
+        echo ""
+        echo "  Then, in a new shell:"
+        echo "    ssh-add -L | grep git-signing > ~/.ssh/git-signing.pub"
+        echo "    ssh -T git@github.com"
         echo ""
       description: Next steps
       stdout: true
