@@ -3,14 +3,40 @@
 set -e
 set -x
 
-# FIXME: the check does not seem to work
-# if ! brew_loc ="$(type -p "$brew")" || [[ -z $brew_loc ]]; then
-#   echo Installing Homebrew
-#   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-#   echo >> /Users/alexey/.zprofile
-#   echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/alexey/.zprofile
-#   eval "$(/opt/homebrew/bin/brew shellenv)"
-# fi
+# --- Homebrew ----------------------------------------------------------------
+# dotbot's brewfile directive needs `brew` on PATH in THIS shell. The official
+# installer does not modify the running shell's environment, so even a fresh
+# successful install has to be eval'd in before dotbot gets a turn.
+if ! command -v brew >/dev/null 2>&1; then
+  if [ "$(uname -m)" = "arm64" ]; then
+    BREW_PREFIX=/opt/homebrew
+  else
+    BREW_PREFIX=/usr/local
+  fi
+
+  if [ ! -x "$BREW_PREFIX/bin/brew" ]; then
+    echo "Installing Homebrew (this will ask for your password)..."
+    # xtrace off: otherwise it dumps the entire fetched installer to the terminal
+    set +x
+    NONINTERACTIVE=1 /bin/bash -c \
+      "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    set -x
+  fi
+
+  # this shell, so the brewfile directive below can find it
+  eval "$("$BREW_PREFIX/bin/brew" shellenv)"
+
+  # future shells, appended once
+  if ! grep -qF 'brew shellenv' "$HOME/.zprofile" 2>/dev/null; then
+    printf '\neval "$(%s/bin/brew shellenv)"\n' "$BREW_PREFIX" >> "$HOME/.zprofile"
+  fi
+fi
+
+# Fail here rather than four directives deep into a dotbot run.
+if ! command -v brew >/dev/null 2>&1; then
+  echo "Homebrew is still not on PATH. Aborting." >&2
+  exit 1
+fi
 
 CONFIG="install.conf.yaml"
 DOTBOT_DIR="dotbot"

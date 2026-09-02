@@ -5,10 +5,11 @@ My dotfiles, based on [Dotbot](https://github.com/anishathalye/dotbot).
 ### 1. Prerequisites
 
 ```sh
-xcode-select --install
+xcode-select --install   # for git, so you can clone this repo
 ```
 
-Plus [Homebrew](https://brew.sh/).
+Homebrew is **not** a prerequisite — `./install` installs it if missing, and
+the Homebrew installer pulls in the Command Line Tools itself.
 
 ### 2. Clone without leaving a key behind
 
