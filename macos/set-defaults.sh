@@ -1,8 +1,28 @@
 #!/bin/bash
-# This script supposed to set up macOS defaults.
-# But it doesn't not really work.
-# I used it as a notebook to set up defaults.
+# macOS defaults. Run as your user, never under sudo -- `defaults write`
+# targets the effective user's preference domain, so root writes go to
+# /var/root and never reach your account.
 # https://macos-defaults.com/
+
+# --- FileVault ---------------------------------------------------------------
+# Checked, not enabled: `fdesetup enable` issues a recovery key that has to be
+# captured interactively, so it cannot be done unattended. Everything below
+# assumes this is on.
+if ! fdesetup status 2>/dev/null | grep -q 'FileVault is On'; then
+  echo ""
+  echo "  ##########################################################"
+  echo "  #  FileVault is OFF                                      #"
+  echo "  #                                                        #"
+  echo "  #  Apple silicon encrypts the volume either way, but     #"
+  echo "  #  without FileVault the volume key is protected only    #"
+  echo "  #  by the hardware UID -- the disk unlocks with no       #"
+  echo "  #  password at all. Every control below assumes it is    #"
+  echo "  #  on, so turn it on before trusting any of them.        #"
+  echo "  #                                                        #"
+  echo "  #  System Settings > Privacy & Security > FileVault      #"
+  echo "  ##########################################################"
+  echo ""
+fi
 
 # Disable press-and-hold for keys in favor of key repeat.
 defaults write -g ApplePressAndHoldEnabled -bool false

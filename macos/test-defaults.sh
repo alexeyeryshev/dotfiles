@@ -39,6 +39,16 @@ else
 fi
 
 echo ""
+echo "Checking FileVault..."
+if fdesetup status 2>/dev/null | grep -q 'FileVault is On'; then
+  printf "  ok   %-45s = on\n" "FileVault"
+else
+  printf "  FAIL %-45s expected=on actual=%s\n" "FileVault" \
+    "$(fdesetup status 2>/dev/null | head -1)"
+  fail=1
+fi
+
+echo ""
 echo "Checking screen lock..."
 
 batt_ds=$(pmset -g custom | sed -n '/^Battery Power/,/^AC Power/p' | awk '/displaysleep/{print $2}')
