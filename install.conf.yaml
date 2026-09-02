@@ -100,8 +100,16 @@
 
 # Follow ups
 - shell:
-    - command: ssh/setup-signing.sh
-      description: Wire up SSH commit signing
+    - command: |
+        echo ""
+        echo "  Commit signing is ON, so 'git commit' fails until the agent"
+        echo "  holds a key. To finish:"
+        echo "    1. open Secretive, allow notifications"
+        echo "    2. create an ECDSA-256 key, auth required before each use"
+        echo "    3. add its public key to GitHub TWICE --"
+        echo "       once as an Authentication Key, once as a Signing Key"
+        echo "    4. open a new shell, then: ssh -T git@github.com"
+        echo ""
+      description: Next steps
       stdout: true
-      stderr: true
     - [echo "You're done!"]

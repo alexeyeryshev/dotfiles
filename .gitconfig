@@ -50,16 +50,22 @@
 # signing is enabled before a key exists. defaultKeyCommand below takes the
 # first key from the agent, so once Secretive holds one, this all just works.
 #
+# SSH commit signing, backed by the Secure Enclave key held in Secretive.
+#
 # defaultKeyCommand resolves the key from the agent at signing time, so no
-# machine-specific key identity is stored here. ssh/setup-signing.sh seeds
-# the allowed signers file and is run by ./install.
+# machine-specific key identity lives here and this works unchanged on a new
+# machine holding a different key. Nothing needs provisioning after install.
+#
+# gpg.ssh.allowedSignersFile is deliberately NOT set. Per git's gpg-interface,
+# it is read only by the verify path (ssh-keygen -Y find-principals / verify);
+# the sign path never touches it, and GitHub checks the Verified badge server
+# side against the Signing Key on the account. The only thing given up is local
+# `git log --show-signature`, which will report signatures as unverified.
 #
 # NOTE: with gpgsign on, `git commit` fails until the agent holds a key.
-# Create it in Secretive, then re-run ./ssh/setup-signing.sh.
 [gpg]
 	format = ssh
 [gpg "ssh"]
-	allowedSignersFile = ~/.ssh/allowed_signers
 	defaultKeyCommand = ssh-add -L
 [commit]
 	gpgsign = true
