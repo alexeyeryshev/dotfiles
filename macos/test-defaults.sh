@@ -63,6 +63,13 @@ printf "  info %-45s = %s\n" "screen lock delay" \
 printf "  info %-45s = %s\n" "screensaver idleTime (want 120)" \
   "$(defaults -currentHost read com.apple.screensaver idleTime 2>/dev/null || echo '<unset>')"
 
+if grep -qE '^auth[[:space:]]+sufficient[[:space:]]+pam_tid.so' /etc/pam.d/sudo_local 2>/dev/null; then
+  printf "  ok   %-45s = enabled\n" "Touch ID for sudo"
+else
+  printf "  FAIL %-45s expected=enabled actual=not configured\n" "Touch ID for sudo"
+  fail=1
+fi
+
 echo ""
 if [ "$fail" -eq 0 ]; then
   echo "All checks passed."

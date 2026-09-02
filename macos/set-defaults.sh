@@ -85,6 +85,15 @@ sysadminctl -screenLock immediate -password - || \
 # Settings > Lock Screen > Start Screen Saver when inactive
 defaults -currentHost write com.apple.screensaver idleTime -int 120
 
+# --- Touch ID for sudo -------------------------------------------------------
+# /etc/pam.d/sudo_local survives OS updates; editing /etc/pam.d/sudo directly
+# does not -- the updater overwrites it. Template ships with macOS 14+.
+if [ -f /etc/pam.d/sudo_local.template ] && [ ! -f /etc/pam.d/sudo_local ]; then
+  sudo cp /etc/pam.d/sudo_local.template /etc/pam.d/sudo_local
+  sudo sed -i '' 's/^#auth/auth/' /etc/pam.d/sudo_local
+  echo "  Touch ID for sudo enabled"
+fi
+
 # Apply changes that only need an app restart.
 killall Finder Dock 2>/dev/null || true
 
