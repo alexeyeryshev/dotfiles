@@ -103,8 +103,17 @@
       create: true
 
 # OS X
+# NOT under sudo: `defaults write` targets the effective user's preference
+# domain, so running this as root wrote every setting into /var/root and the
+# logged-in account never saw them. The script elevates the two commands that
+# genuinely need root (pmset) on its own.
+# stdin is required so sudo/sysadminctl password prompts can reach the terminal.
 - shell:
-    - ['sudo macos/set-defaults.sh', Setting up OS X defaults]
+    - command: macos/set-defaults.sh
+      description: Setting up macOS defaults
+      stdin: true
+      stdout: true
+      stderr: true
 
 # Follow ups
 - shell:
