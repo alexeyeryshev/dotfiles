@@ -1,12 +1,10 @@
 # Must brews
-brew 'fish'
 brew 'fzf'
 brew 'bat'
 brew 'ripgrep'
 
 # Dev Tools
 brew 'vim', args={'--with-lua': true}
-brew 'tmux'
 brew 'htop'
 brew 'jq'
 # referenced by the ghw / ghpw aliases in zsh/custom/aliases.zsh
@@ -27,7 +25,6 @@ cask 'brave-browser'
 cask 'secretive'
 cask 'karabiner-elements'
 cask 'rectangle'
-cask 'iterm2'
 cask 'warp'
 cask 'cursor'
 
@@ -46,6 +43,10 @@ cask 'meetingbar'
 brew 'git-spice'
 
 # Graveyard
+# config moved to .archive/, no longer used
+# brew 'fish'
+# brew 'tmux'
+# cask 'iterm2'
 # improve alt-tab functionality
 # it got slow with recent OS X version, holding this off for a while
 # cask 'alt-tab'
