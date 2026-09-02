@@ -70,8 +70,9 @@
 # gpg-interface.c) and Secure Enclave keys are P-256, starting with `ecdsa-`.
 # The file form sidesteps that entirely.
 #
-# NOTE: this file must exist or commits fail. `install` provisions it. To
-# recreate by hand, with Secretive running:
+# NOTE: this file must exist or commits fail. macos/check-signing.sh
+# provisions it during install and warns when it cannot. To do it by hand,
+# with Secretive running:
 #
 #     ssh-add -L | grep git-signing > ~/.ssh/git-signing.pub
 #

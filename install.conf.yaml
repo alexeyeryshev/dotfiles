@@ -98,24 +98,17 @@
       stdout: true
       stderr: true
 
-# Commit signing key
-# Best-effort: Secretive keys cannot exist before the app has been launched and
-# keys created, so this provisions ~/.ssh/git-signing.pub only when the agent
-# already holds a key named `git-signing`. The follow-up notes cover doing it by
-# hand on a fresh machine.
-# It writes only on a successful match -- a bare `grep > file` would leave an
-# empty file behind, which git reports as a confusing signing failure.
+# Commit signing
+# Provisions ~/.ssh/git-signing.pub from the agent and checks that SecretAgent
+# can post notifications. Best-effort and advisory: Secretive keys cannot exist
+# before the app has been launched and keys created, so on a first run this
+# prints what is still missing rather than failing. Runs after set-defaults.sh
+# so its warnings land near the other security warnings.
 - shell:
-    - command: |
-        if K=$(ssh-add -L 2>/dev/null | grep -m1 git-signing); then
-          printf '%s\n' "$K" > ~/.ssh/git-signing.pub
-          chmod 600 ~/.ssh/git-signing.pub
-          echo "  provisioned ~/.ssh/git-signing.pub"
-        else
-          echo "  no 'git-signing' key in the agent yet -- see next steps"
-        fi
-      description: Provision the commit signing public key
+    - command: macos/check-signing.sh
+      description: Checking commit signing
       stdout: true
+      stderr: true
 
 # Follow ups
 - shell:
