@@ -63,9 +63,13 @@ Brewfile): allow notifications, create an **ECDSA-256** key with
 twice — once as an Authentication Key, once as a Signing Key.
 
 ```sh
+./ssh/setup-signing.sh  # seeds ~/.ssh/allowed_signers from the new key
 ssh -T git@github.com   # Touch ID once
 ssh -T git@github.com   # no prompt — multiplexing is working
 ```
+
+Commit signing is on by default, so `git commit` fails until that key exists
+and `setup-signing.sh` has run.
 
 ### 5. Verify
 

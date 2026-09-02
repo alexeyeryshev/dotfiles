@@ -50,23 +50,21 @@
 # signing is enabled before a key exists. defaultKeyCommand below takes the
 # first key from the agent, so once Secretive holds one, this all just works.
 #
-# Turn it on after creating the key:
-#     git config --global commit.gpgsign true
-#     git config --global tag.gpgSign true
-# (that writes into this file -- ~/.gitconfig is a symlink into the repo)
+# defaultKeyCommand resolves the key from the agent at signing time, so no
+# machine-specific key identity is stored here. ssh/setup-signing.sh seeds
+# the allowed signers file and is run by ./install.
 #
-# And seed the allowed signers file so local verification works:
-#     echo "$(git config --get user.email) $(ssh-add -L | head -1)" \
-#       >> ~/.ssh/allowed_signers
+# NOTE: with gpgsign on, `git commit` fails until the agent holds a key.
+# Create it in Secretive, then re-run ./ssh/setup-signing.sh.
 [gpg]
 	format = ssh
 [gpg "ssh"]
 	allowedSignersFile = ~/.ssh/allowed_signers
 	defaultKeyCommand = ssh-add -L
-# [commit]
-# 	gpgsign = true
-# [tag]
-# 	gpgSign = true
+[commit]
+	gpgsign = true
+[tag]
+	gpgSign = true
 [pull]
 	rebase = true
 [user]

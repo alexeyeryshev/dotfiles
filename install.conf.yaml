@@ -100,4 +100,8 @@
 
 # Follow ups
 - shell:
+    - command: ssh/setup-signing.sh
+      description: Wire up SSH commit signing
+      stdout: true
+      stderr: true
     - [echo "You're done!"]
