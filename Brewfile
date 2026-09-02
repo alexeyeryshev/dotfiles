@@ -13,7 +13,6 @@ brew 'gh'
 brew 'gitleaks'
 brew 'yq'
 brew 'nvm'
-brew 'pyenv'
 
 ## Zsh
 brew 'zsh-syntax-highlighting'
@@ -38,9 +37,6 @@ cask 'notion'
 cask 'raycast'
 # Shows the next meeting in the menu bar
 cask 'meetingbar'
-
-# Experiments
-brew 'git-spice'
 
 # Graveyard
 # config moved to .archive/, no longer used
