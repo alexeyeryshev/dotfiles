@@ -11,11 +11,17 @@
 #
 #     ssh -O exit git@github.com
 #
-# The Match block is guarded on the socket actually existing, so this file is
-# still valid before Secretive has been set up and on machines without it --
-# ssh just falls back to whatever SSH_AUTH_SOCK points at.
+# The Match block below deliberately has no host criterion, so Secretive's agent
+# is used for EVERY host, not just GitHub. The SSH_AUTH_SOCK export in
+# ~/.zshrc.custom already covers anything launched from a shell; this is what
+# covers GUI apps (VS Code, editors, git clients) that do not inherit the shell
+# environment and would otherwise find no agent at all.
+#
+# It is guarded on the socket actually existing, so this file stays valid before
+# Secretive has been set up and on machines without it -- ssh just falls back to
+# whatever SSH_AUTH_SOCK points at. Cost is one `test -S` fork per ssh call.
 
-Match host github.com exec "test -S %d/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh"
+Match exec "test -S %d/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh"
   IdentityAgent ~/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh
 
 Host github.com
