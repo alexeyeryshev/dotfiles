@@ -1,6 +1,17 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
+# Homebrew. Must come first: everything below, including ~/.zshrc.custom,
+# expects brew on PATH and reads $HOMEBREW_PREFIX. /opt/homebrew is Apple
+# silicon, /usr/local is Intel -- do not hardcode either.
+for _brew in /opt/homebrew/bin/brew /usr/local/bin/brew; do
+  if [ -x "$_brew" ]; then
+    eval "$("$_brew" shellenv)"
+    break
+  fi
+done
+unset _brew
+
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -133,13 +144,3 @@ fpath+=~/.zfunc; autoload -Uz compinit; compinit
 # peon-ping quick controls
 alias peon="bash $HOME/.claude/hooks/peon-ping/peon.sh"
 [ -f "$HOME/.claude/hooks/peon-ping/completions.bash" ] && source "$HOME/.claude/hooks/peon-ping/completions.bash"
-
-# pnpm
-export PNPM_HOME="/Users/alexey/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
-
-export PATH="/opt/homebrew/bin:$PATH"

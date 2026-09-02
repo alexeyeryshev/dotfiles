@@ -28,7 +28,9 @@ esac
 export PATH="$HOME/.local/bin:$PATH"
 
 # Java
-export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+if [ -d "${HOMEBREW_PREFIX-}/opt/openjdk/bin" ]; then
+  export PATH="$HOMEBREW_PREFIX/opt/openjdk/bin:$PATH"
+fi
 
 # Git spice
 eval "$(gs shell completion zsh)"
