@@ -26,6 +26,7 @@ cask 'karabiner-elements'
 cask 'rectangle'
 cask 'warp'
 cask 'cursor'
+cask 'slack'
 
 # Other tools
 cask 'keeweb'
