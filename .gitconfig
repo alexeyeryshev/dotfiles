@@ -70,11 +70,11 @@
 # gpg-interface.c) and Secure Enclave keys are P-256, starting with `ecdsa-`.
 # The file form sidesteps that entirely.
 #
-# NOTE: this file must exist or commits fail. macos/check-signing.sh
-# provisions it during install and warns when it cannot. To do it by hand,
-# with Secretive running:
-#
-#     ssh-add -L | grep git-signing > ~/.ssh/git-signing.pub
+# NOTE: this file must exist or commits fail. macos/check-signing.sh writes it,
+# identifying the signing key by matching the agent against the signing keys
+# registered on the GitHub account -- the SSH comment cannot be used, since
+# Secretive reports the same one for every key here and renaming a secret does
+# not change it.
 #
 # gpg.ssh.allowedSignersFile is deliberately NOT set. Per git's gpg-interface,
 # it is read only by the verify path (ssh-keygen -Y find-principals / verify);

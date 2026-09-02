@@ -12,26 +12,75 @@ echo "Checking commit signing..."
 
 # --- signing key file --------------------------------------------------------
 # user.signingKey points at this file rather than at a literal key. Git hands it
-# to ssh-keygen, which finds the matching private key in the agent. Two Secure
-# Enclave keys are otherwise indistinguishable from outside the agent: it
-# exposes no metadata beyond the comment and gives no ordering guarantee.
+# to ssh-keygen, which finds the matching private key in the agent.
 #
-# Written only on a match -- a bare `grep > file` leaves an empty file behind,
-# which git reports as a confusing signing failure.
-if key=$(ssh-add -L 2>/dev/null | grep -m1 git-signing); then
-  printf '%s\n' "$key" > "$SIGNING_PUB"
+# Identifying WHICH agent key is the signing one is the awkward part. The SSH
+# comment cannot do it: Secretive reports the same comment for every key here,
+# and renaming a secret does not change what the agent reports, so a naming
+# convention is not something this can rely on.
+#
+# Match against the list that is already authoritative instead -- the SIGNING
+# keys registered on the GitHub account. That endpoint is public and needs no
+# token, and an agent key appearing in it is the signing key by definition.
+# Needs the key to be on GitHub already, which the notes below ask for anyway.
+#
+# Never writes on a failed match: a wrong or empty file makes git fail in a way
+# that does not name the cause.
+github_user=$(git config --get github.user 2>/dev/null)
+
+matched=$(python3 - "$github_user" <<'PY' 2>/dev/null
+import base64, json, subprocess, sys, urllib.request
+
+user = sys.argv[1] if len(sys.argv) > 1 else ""
+if not user:
+    raise SystemExit
+
+try:
+    out = subprocess.run(["ssh-add", "-L"], capture_output=True, text=True, timeout=5).stdout
+except Exception:
+    raise SystemExit
+agent = [l for l in out.strip().split("\n") if l.strip()]
+if not agent:
+    raise SystemExit
+
+try:
+    with urllib.request.urlopen(
+        f"https://api.github.com/users/{user}/ssh_signing_keys", timeout=5
+    ) as r:
+        remote = json.load(r)
+except Exception:
+    raise SystemExit
+if not isinstance(remote, list):
+    raise SystemExit
+
+blobs = set()
+for k in remote:
+    try:
+        blobs.add(base64.b64decode(k["key"].split()[1]))
+    except Exception:
+        pass
+
+for line in agent:
+    try:
+        if base64.b64decode(line.split()[1]) in blobs:
+            print(line)
+            break
+    except Exception:
+        pass
+PY
+)
+
+if [ -n "$matched" ]; then
+  printf '%s\n' "$matched" > "$SIGNING_PUB"
   chmod 600 "$SIGNING_PUB"
-  printf "  ok   %-42s %s\n" "signing key provisioned" \
+  printf "  ok   %-42s %s\n" "signing key matched against GitHub" \
     "$(ssh-keygen -lf "$SIGNING_PUB" 2>/dev/null | awk '{print $2}')"
 elif [ -f "$SIGNING_PUB" ]; then
   printf "  ok   %-42s %s\n" "signing key file present" \
     "$(ssh-keygen -lf "$SIGNING_PUB" 2>/dev/null | awk '{print $2}')"
-  echo "       No agent key named 'git-signing', so this file cannot be"
-  echo "       reprovisioned automatically. The file itself is what git signs"
-  echo "       with, so signing is unaffected. Renaming a key in Secretive does"
-  echo "       not reliably change the comment the agent reports, so on a new"
-  echo "       machine pick the signing key out of 'ssh-add -L' by fingerprint"
-  echo "       and write it here yourself."
+  echo "       Could not confirm it against GitHub's signing key list (no"
+  echo "       network, no github.user set, or the key is not registered"
+  echo "       there). Signing still works from this file."
 else
   echo ""
   echo "  ##########################################################"
@@ -39,11 +88,9 @@ else
   echo "  #                                                        #"
   echo "  #  commit.gpgsign is on and user.signingKey points at    #"
   echo "  #  ~/.ssh/git-signing.pub, so 'git commit' fails until   #"
-  echo "  #  that file exists. In Secretive, create a key named    #"
-  echo "  #  'git-signing' with Notify, add it to GitHub as a      #"
-  echo "  #  SIGNING key, then re-run this or:                     #"
-  echo "  #                                                        #"
-  echo "  #    ssh-add -L | grep git-signing > ~/.ssh/git-signing.pub"
+  echo "  #  that file exists. Create the signing key in           #"
+  echo "  #  Secretive, add it to GitHub as a SIGNING key, then    #"
+  echo "  #  re-run this script -- it will find and write it.      #"
   echo "  ##########################################################"
   echo ""
 fi
