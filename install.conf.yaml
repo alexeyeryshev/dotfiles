@@ -47,30 +47,6 @@
 - shell:
   - [cd ~/.dotbot-git/fonts && ./install.sh, "Install Powerline fonts"]
 
-# Install Fish and Oh My Fish
-
-# - link:
-#     ~/.config/fish/config.fish:
-#       path: fish/config.fish
-#       force: true
-#       create: true
-#     ~/.config/fish/functions/fzf_key_bindings.fish:
-#       path: fish/functions/fzf_key_bindings.fish
-#       create: true
-#       glob: true
-#     ~/.config/omf:
-#       path: omf
-#     ~/.ideavimrc:
-#       path: idea/.ideavimrc
-
-# - git:
-#     ~/.dotbot-git/oh-my-fish:
-#         url: https://github.com/oh-my-fish/oh-my-fish.git
-#         description: Oh my fish
-
-# - shell:
-#     - [cd ~/.dotbot-git/oh-my-fish && bin/install --offline --yes --noninteractive, Install Oh My Fish]
-
 # Install Zsh and Oh My Zsh
 - shell:
   - [cp ~/.zshrc ~/.zshrc.bak, Backup existing .zshrc]
@@ -109,13 +85,6 @@
       force: true
       create: true
 
-# Tmux
-- link:
-    ~/.config/tmux/tmux.conf:
-      path: tmux/tmux.conf
-      force: true
-      create: true
-
 # OS X
 # NOT under sudo: `defaults write` targets the effective user's preference
 # domain, so running this as root wrote every setting into /var/root and the
@@ -132,4 +101,3 @@
 # Follow ups
 - shell:
     - [echo "You're done!"]
-#    - [echo "Setup Fish", Don't forget to setup Fish as main shell for Iterm2 in Iterm2's settings.]
