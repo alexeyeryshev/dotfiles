@@ -27,11 +27,6 @@ esac
 # UV managed
 export PATH="$HOME/.local/bin:$PATH"
 
-# Java
-if [ -d "${HOMEBREW_PREFIX-}/opt/openjdk/bin" ]; then
-  export PATH="$HOMEBREW_PREFIX/opt/openjdk/bin:$PATH"
-fi
-
 # Custom bin
 export PATH="$HOME/.bin:$PATH"
 
