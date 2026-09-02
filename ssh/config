@@ -1,0 +1,30 @@
+# Managed by dotfiles. Do not edit in place -- edit ssh/config in the repo.
+#
+# SSH keys live in the Secure Enclave via Secretive, so the private half never
+# exists as a file on disk. It cannot be exported, copied, or read by anything
+# running on this machine, and every signature needs Touch ID.
+#
+# ControlMaster keeps one authenticated connection to GitHub alive in the
+# background, so a work session costs a single Touch ID rather than one per
+# push. Note ControlPersist is an IDLE timer: it resets on every use, so a
+# connection you keep using outlives the 4h. To close it on demand:
+#
+#     ssh -O exit git@github.com
+#
+# The Match block is guarded on the socket actually existing, so this file is
+# still valid before Secretive has been set up and on machines without it --
+# ssh just falls back to whatever SSH_AUTH_SOCK points at.
+
+Match host github.com exec "test -S %d/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh"
+  IdentityAgent ~/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh
+
+Host github.com
+  User git
+  ControlMaster auto
+  ControlPath ~/.ssh/cm-%C
+  ControlPersist 4h
+
+# Once you keep more than a couple of keys in the agent, pin the right one to
+# avoid "Too many authentication failures":
+#   IdentityFile ~/.ssh/<key>.pub
+#   IdentitiesOnly yes

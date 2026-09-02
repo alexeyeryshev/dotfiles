@@ -46,3 +46,9 @@ export XDG_CONFIG_HOME="$HOME/.config"
 
 # export gpg for gpg2  
 export GPG_TTY=$(tty)
+
+# Secretive - SSH agent backed by the Secure Enclave.
+# Guarded so these dotfiles stay valid on a machine without it.
+_secretive_sock="$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh"
+[ -S "$_secretive_sock" ] && export SSH_AUTH_SOCK="$_secretive_sock"
+unset _secretive_sock

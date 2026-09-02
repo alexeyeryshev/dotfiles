@@ -19,6 +19,8 @@ brew 'zsh-syntax-highlighting'
 # Must casks
 # change system wide shortcuts
 cask 'brave-browser'
+# SSH keys held in the Secure Enclave: non-exportable, Touch ID per use
+cask 'secretive'
 cask 'karabiner-elements'
 cask 'rectangle'
 cask 'iterm2'

@@ -24,6 +24,20 @@
       force: true
       create: true
 
+# SSH
+# Runs after the Brewfile has installed Secretive. The agent socket still will
+# not exist until Secretive.app has been launched and a key created, which is
+# why ssh/config guards the IdentityAgent line on the socket being there.
+# force: true replaces an existing ~/.ssh/config -- check before re-running on
+# a machine that already has one.
+- shell:
+    - [mkdir -p ~/.ssh && chmod 700 ~/.ssh, Ensure ~/.ssh exists with safe permissions]
+- link:
+    ~/.ssh/config:
+      path: ssh/config
+      force: true
+      create: true
+
 # Powerline fonts
 - git:
     ~/.dotbot-git/fonts:
