@@ -3,6 +3,12 @@
 set -e
 set -x
 
+# Prime the sudo timestamp up front. Homebrew's installer probes with
+# `sudo -n` when NONINTERACTIVE is set, which never prompts -- with no cached
+# credential it aborts claiming you are not an Administrator, which is
+# misleading. macos/set-defaults.sh needs sudo later anyway, so do it once here.
+sudo -v
+
 # --- Homebrew ----------------------------------------------------------------
 # dotbot's brewfile directive needs `brew` on PATH in THIS shell. The official
 # installer does not modify the running shell's environment, so even a fresh
@@ -15,7 +21,7 @@ if ! command -v brew >/dev/null 2>&1; then
   fi
 
   if [ ! -x "$BREW_PREFIX/bin/brew" ]; then
-    echo "Installing Homebrew (this will ask for your password)..."
+    echo "Installing Homebrew..."
     # xtrace off: otherwise it dumps the entire fetched installer to the terminal
     set +x
     NONINTERACTIVE=1 /bin/bash -c \
