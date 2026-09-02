@@ -9,6 +9,10 @@ brew 'vim', args={'--with-lua': true}
 brew 'tmux'
 brew 'htop'
 brew 'jq'
+# referenced by the ghw / ghpw aliases in zsh/custom/aliases.zsh
+brew 'gh'
+# secret scanning, for a pre-commit hook
+brew 'gitleaks'
 brew 'yq'
 brew 'nvm'
 brew 'pyenv'
