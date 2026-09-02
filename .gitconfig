@@ -43,8 +43,30 @@
 	default = simple
 	autoSetupRemote = true
 
+# SSH commit signing, backed by the Secure Enclave key in Secretive.
+#
+# Deliberately pre-wired but NOT switched on: git errors out with "either
+# user.signingkey or gpg.ssh.defaultKeyCommand needs to be configured" if
+# signing is enabled before a key exists. defaultKeyCommand below takes the
+# first key from the agent, so once Secretive holds one, this all just works.
+#
+# Turn it on after creating the key:
+#     git config --global commit.gpgsign true
+#     git config --global tag.gpgSign true
+# (that writes into this file -- ~/.gitconfig is a symlink into the repo)
+#
+# And seed the allowed signers file so local verification works:
+#     echo "$(git config --get user.email) $(ssh-add -L | head -1)" \
+#       >> ~/.ssh/allowed_signers
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	allowedSignersFile = ~/.ssh/allowed_signers
+	defaultKeyCommand = ssh-add -L
 # [commit]
 # 	gpgsign = true
+# [tag]
+# 	gpgSign = true
 [pull]
 	rebase = true
 [user]
