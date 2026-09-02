@@ -26,8 +26,12 @@ if key=$(ssh-add -L 2>/dev/null | grep -m1 git-signing); then
 elif [ -f "$SIGNING_PUB" ]; then
   printf "  ok   %-42s %s\n" "signing key file present" \
     "$(ssh-keygen -lf "$SIGNING_PUB" 2>/dev/null | awk '{print $2}')"
-  echo "       no agent key named 'git-signing', so this file cannot be"
-  echo "       reprovisioned. Rename the key in Secretive (Edit -> Save)."
+  echo "       No agent key named 'git-signing', so this file cannot be"
+  echo "       reprovisioned automatically. The file itself is what git signs"
+  echo "       with, so signing is unaffected. Renaming a key in Secretive does"
+  echo "       not reliably change the comment the agent reports, so on a new"
+  echo "       machine pick the signing key out of 'ssh-add -L' by fingerprint"
+  echo "       and write it here yourself."
 else
   echo ""
   echo "  ##########################################################"
@@ -50,45 +54,41 @@ fi
 # the ONLY remaining signal that the key was used: with it off, anything running
 # as this user can sign commits silently.
 #
-# The ncprefs flag bits are reverse-engineered, not documented. 0x2000 tracking
-# "notifications off" matches observation on macOS 26 but is a heuristic, so
-# this warns and points at System Settings rather than asserting.
-notify_state=$(python3 - <<'PY' 2>/dev/null
-import plistlib, os, sys
+# Worth knowing, and worth NOT over-claiming. An earlier version of this check
+# read com.apple.ncprefs and treated flag bit 0x2000 as "notifications off".
+# That was wrong: SecretAgent carried 0x2000 while notifications were working
+# fine, so the check warned on a healthy machine. Those flag bits are
+# reverse-engineered, undocumented, and evidently not stable across macOS
+# releases. The on-disk plist is also written lazily, so it can lag a toggle by
+# hours -- reading it at all races with the thing it is trying to observe.
+#
+# So this reports only what can be established: whether SecretAgent has ever
+# registered with Notification Center. Present tells you nothing about the
+# on/off state, which is why the real test named here is behavioural.
+notify_registered=$(python3 - <<'PY' 2>/dev/null
+import plistlib, os
 p = os.path.expanduser("~/Library/Preferences/com.apple.ncprefs.plist")
 try:
     apps = plistlib.load(open(p, "rb")).get("apps", [])
 except Exception:
-    sys.exit()
-hit = [a for a in apps if "Secretive.SecretAgent" in str(a.get("bundle-id", ""))]
-if not hit:
-    print("missing")
-else:
-    print("off" if hit[0].get("flags", 0) & 0x2000 else "on")
+    raise SystemExit
+print(any("Secretive.SecretAgent" in str(a.get("bundle-id", "")) for a in apps))
 PY
 )
 
-case "$notify_state" in
-  on)
-    printf "  ok   %-42s %s\n" "SecretAgent notifications" "enabled" ;;
-  off|missing)
-    [ "$notify_state" = missing ] \
-      && detail="SecretAgent has never been granted notification access" \
-      || detail="SecretAgent notifications appear to be turned off"
-    echo ""
-    echo "  ##########################################################"
-    echo "  #  Commit signing is silent                              #"
-    echo "  #                                                        #"
-    echo "  #  The signing key uses Notify, not Touch ID, so the     #"
-    echo "  #  notification is the only sign it was used. Without    #"
-    echo "  #  it, any process running as you can sign commits as    #"
-    echo "  #  you, with no prompt and no trace.                     #"
-    echo "  #                                                        #"
-    echo "  #  System Settings -> Notifications -> SecretAgent       #"
-    echo "  ##########################################################"
-    echo "  ($detail. The flag read is a heuristic -- confirm in System Settings.)"
-    echo ""
-    ;;
-  *)
-    echo "  --   SecretAgent notifications              could not be determined" ;;
-esac
+if [ "$notify_registered" = "False" ]; then
+  echo ""
+  echo "  ##########################################################"
+  echo "  #  SecretAgent has no notification registration          #"
+  echo "  #                                                        #"
+  echo "  #  The signing key uses Notify, not Touch ID, so the     #"
+  echo "  #  notification is the only sign it was used. Launch     #"
+  echo "  #  Secretive and allow notifications when asked.         #"
+  echo "  ##########################################################"
+  echo ""
+else
+  printf "  ok   %-42s %s\n" "SecretAgent registered for notifications" "verify below"
+fi
+
+echo "       Notification state cannot be read reliably. Confirm by behaviour:"
+echo "       a banner should appear on the next 'git commit'."
