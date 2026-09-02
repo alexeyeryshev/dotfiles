@@ -10,6 +10,10 @@
       force: true
     ~/.config:
       recursive: true
+    # Drop links to skills that have since left agents/. Unforced, so a skill
+    # installed by some other route survives.
+    ~/.claude/skills:
+    ~/.agents/skills:
 
 - create:
     - ~/.dotbot-git
@@ -83,6 +87,47 @@
     ~/.config/karabiner:
       path: karabiner
       force: true
+      create: true
+
+
+# Agents: global instructions + skills
+# Claude Code and Codex read the same SKILL.md format and the same kind of
+# global instructions file, just from different paths. One copy lives in
+# agents/, and these links point both agents at it. See AGENTS.md.
+
+# One instructions file, both agents. Claude Code reads CLAUDE.md and not
+# AGENTS.md, so the shared file is linked under each name.
+- link:
+    ~/.claude/CLAUDE.md:
+      path: agents/global.md
+      create: true
+    ~/.codex/AGENTS.md:
+      path: agents/global.md
+      create: true
+
+# Skills you wrote. Globbed, so a new directory under agents/skills/ needs no
+# edit here.
+- link:
+    ~/.claude/skills/:
+      path: agents/skills/*
+      glob: true
+      create: true
+    ~/.agents/skills/:
+      path: agents/skills/*
+      glob: true
+      create: true
+
+# Skills from anthropics/skills, a submodule under agents/vendor/. Listed one
+# at a time on purpose: the submodule carries 19, and each one linked here puts
+# its description in every session's skill listing and gives the model one more
+# thing it might invoke on its own. This is the opt-in list. Bump them all with
+# `git submodule update --remote agents/vendor/anthropics-skills`.
+- link:
+    ~/.claude/skills/frontend-design:
+      path: agents/vendor/anthropics-skills/skills/frontend-design
+      create: true
+    ~/.agents/skills/frontend-design:
+      path: agents/vendor/anthropics-skills/skills/frontend-design
       create: true
 
 # OS X

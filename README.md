@@ -80,3 +80,11 @@ macos/test-defaults.sh
 Anything reported failed or unset has to be set by hand in System Settings —
 notably **Start Screen Saver when inactive**, which macOS may refuse to accept
 from a script.
+
+## Agents
+
+`agents/` holds one copy of the global instructions and each skill, symlinked
+into both Claude Code and Codex — `agents/global.md` becomes `~/.claude/CLAUDE.md`
+and `~/.codex/AGENTS.md`, and skills land in `~/.claude/skills/` and
+`~/.agents/skills/`. Upstream skills come in as submodules under `agents/vendor/`,
+the same way `dotbot` does. See [AGENTS.md](AGENTS.md).

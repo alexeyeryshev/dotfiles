@@ -28,6 +28,12 @@ cask 'warp'
 cask 'cursor'
 cask 'slack'
 
+# Coding agents. Both are CLIs, and both read their skills and global
+# instructions from paths that agents/ symlinks into -- see AGENTS.md.
+# Separate from the Claude and ChatGPT desktop apps, which neither one needs.
+cask 'claude-code'
+cask 'codex'
+
 # Other tools
 cask 'keeweb'
 # An app to unify all your messengers.

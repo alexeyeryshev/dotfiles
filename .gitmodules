@@ -7,3 +7,6 @@
 [submodule "dotbot-brew"]
 	path = dotbot-plugins/dotbot-brew
 	url = https://github.com/d12frosted/dotbot-brew.git
+[submodule "agents/vendor/anthropics-skills"]
+	path = agents/vendor/anthropics-skills
+	url = https://github.com/anthropics/skills.git
