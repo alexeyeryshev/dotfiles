@@ -49,7 +49,7 @@
 
 # Install Zsh and Oh My Zsh
 - shell:
-  - [cp ~/.zshrc ~/.zshrc.bak, Backup existing .zshrc]
+  - ['[ ! -f ~/.zshrc ] || cp ~/.zshrc ~/.zshrc.bak', Backup existing .zshrc if there is one]
 - link:
     ~/.zshrc:
       path: zsh/.zshrc.oh-my-zsh
