@@ -1,6 +1,6 @@
 #!/bin/bash
-# Verify the commit-signing setup: the public key file git signs with, and
-# SecretAgent's notification permission.
+# Set up commit signing: provision the public key file git signs with, then
+# report on SecretAgent's notification permission.
 #
 # Advisory only, always exits 0. A fresh machine legitimately has none of this
 # until Secretive has been launched and its keys created, and this runs as part
@@ -8,7 +8,7 @@
 
 SIGNING_PUB="$HOME/.ssh/git-signing.pub"
 
-echo "Checking commit signing..."
+echo "Setting up commit signing..."
 
 # --- signing key file --------------------------------------------------------
 # user.signingKey points at this file rather than at a literal key. Git hands it

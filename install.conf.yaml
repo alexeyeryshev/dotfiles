@@ -144,14 +144,14 @@
       stderr: true
 
 # Commit signing
-# Provisions ~/.ssh/git-signing.pub from the agent and checks that SecretAgent
-# can post notifications. Best-effort and advisory: Secretive keys cannot exist
-# before the app has been launched and keys created, so on a first run this
-# prints what is still missing rather than failing. Runs after set-defaults.sh
-# so its warnings land near the other security warnings.
+# Provisions ~/.ssh/git-signing.pub from the agent and reports whether
+# SecretAgent can post notifications. Best-effort and advisory: Secretive keys
+# cannot exist before the app has been launched and keys created, so on a first
+# run this prints what is still missing rather than failing. Runs after
+# set-defaults.sh so its warnings land near the other security warnings.
 - shell:
-    - command: macos/check-signing.sh
-      description: Checking commit signing
+    - command: macos/setup-signing.sh
+      description: Setting up commit signing
       stdout: true
       stderr: true
 
@@ -179,7 +179,7 @@
         echo "     signing key on Notify, that banner is the only sign the"
         echo "     key was used at all."
         echo ""
-        echo "  4. re-run:  macos/check-signing.sh"
+        echo "  4. re-run:  macos/setup-signing.sh"
         echo "     It identifies the signing key by matching the agent"
         echo "     against the signing keys registered on your GitHub"
         echo "     account, and writes ~/.ssh/git-signing.pub itself."
