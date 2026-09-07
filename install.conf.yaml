@@ -17,11 +17,17 @@
 
 - create:
     - ~/.dotbot-git
+    # Machine-local commit identities. Contents are never tracked here.
+    - ~/.config/git/identities
 
 - brewfile:
     - Brewfile
 
-# Git 
+# Git
+# .gitconfig ends with an include of ~/.config/git/local.gitconfig, which is
+# NOT in this repo and NOT linked from here: it is where machine-local config
+# lives, including any extra commit identities. Nothing to install -- git
+# treats a missing include path as a no-op.
 - link:
     ~/.gitconfig:
       path: .gitconfig

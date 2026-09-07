@@ -76,17 +76,27 @@
 # Secretive reports the same one for every key here and renaming a secret does
 # not change it.
 #
-# gpg.ssh.allowedSignersFile is deliberately NOT set. Per git's gpg-interface,
-# it is read only by the verify path (ssh-keygen -Y find-principals / verify);
-# the sign path never touches it, and GitHub checks the Verified badge server
-# side against the Signing Key on the account. The only thing given up is local
-# `git log --show-signature`, which will report signatures as unverified.
+# gpg.ssh.allowedSignersFile is set purely for LOCAL verification. Per git's
+# gpg-interface it is read only by the verify path (ssh-keygen -Y
+# find-principals / verify); the sign path never touches it, and GitHub checks
+# the Verified badge server side against the Signing Key on the account. So it
+# buys exactly one thing: `git log --show-signature` and %G? reporting `G`
+# instead of refusing to check. Nothing depends on it, and deleting the file
+# breaks verification only, never committing.
+#
+# The file maps a PRINCIPAL (a committer email) to a key, so it needs one line
+# per identity you commit under, not one per key: an SSH key carries no email,
+# so a single Secure Enclave key signs for all of them, and a commit authored
+# by an address missing from this file verifies as unknown.
+# macos/setup-signing.sh writes it -- do not hand-edit.
 #
 # NOTE: the signing key must be registered on GitHub as a *Signing* key. That
 # list is separate from Authentication keys, and a key present only in the
 # Authentication list produces valid signatures with no Verified badge.
 [gpg]
 	format = ssh
+[gpg "ssh"]
+	allowedSignersFile = ~/.config/git/allowed_signers
 [commit]
 	gpgsign = true
 [tag]
@@ -97,7 +107,6 @@
 	name = alexeyeryshev
 	email = a.a.eryshev@gmail.com
 	signingKey = ~/.ssh/git-signing.pub
-	# signingkey = 18F3685C0022BFF3
 [github]
 	user = alexeyeryshev
 # FIXME: learn about this
@@ -113,3 +122,21 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+
+# Machine-local git config, if there is any.
+#
+# Everything private to a machine goes here rather than in this file: extra
+# identities and the includeIf rules that select them, host-specific paths,
+# anything not worth publishing. This repo is public; that file is not in it.
+#
+# Position matters. Includes are applied where they appear and later values
+# win, so this has to sit AFTER [user] or the identity above would override
+# whatever the include sets, which is the whole point of it.
+#
+# Deliberately not ~/.config/git/config: git reads that one BEFORE ~/.gitconfig,
+# so it loses every conflict with the values above -- the exact opposite of
+# what is wanted here. An explicit include is the only ordering that works.
+#
+# A missing file is a silent no-op, so this stays valid on a fresh machine.
+[include]
+	path = ~/.config/git/local.gitconfig

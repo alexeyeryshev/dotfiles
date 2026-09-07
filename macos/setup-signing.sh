@@ -7,8 +7,47 @@
 # of an unattended install.
 
 SIGNING_PUB="$HOME/.ssh/git-signing.pub"
+ALLOWED_SIGNERS="$HOME/.config/git/allowed_signers"
 
 echo "Setting up commit signing..."
+
+# --- allowed_signers ---------------------------------------------------------
+# gpg.ssh.allowedSignersFile is read only on the VERIFY path, so nothing here
+# affects whether commits can be made. It is what makes local
+# `git log --show-signature` say "Good signature" instead of refusing to check.
+#
+# The file maps a principal -- a committer EMAIL -- to a key, so it needs one
+# line per identity, not per key. There is only one Secure Enclave signing key;
+# an SSH key carries no email of its own, which is exactly why one key can sign
+# for every identity and why each address has to be listed here.
+#
+# Addresses are discovered, never hardcoded: the global user.email, plus the
+# user.email of every file in ~/.config/git/identities/. That directory is
+# machine-local and not part of this repo, so nothing about which identities
+# exist on a given machine is committed here.
+write_allowed_signers() {
+  key=$(cat "$SIGNING_PUB" 2>/dev/null) || return
+  [ -n "$key" ] || return
+
+  mkdir -p "$(dirname "$ALLOWED_SIGNERS")"
+  : > "$ALLOWED_SIGNERS"
+
+  # Deduped: an identity file repeating the global address would otherwise get
+  # two lines, which ssh-keygen tolerates but makes the file confusing to read.
+  {
+    git config --global --get user.email 2>/dev/null
+    for f in "$HOME"/.config/git/identities/*; do
+      [ -f "$f" ] || continue                     # unmatched glob, or empty dir
+      git config --file "$f" --get user.email 2>/dev/null
+    done
+  } | awk 'NF && !seen[$0]++' | while read -r principal; do
+    printf '%s %s\n' "$principal" "$key" >> "$ALLOWED_SIGNERS"
+  done
+
+  chmod 600 "$ALLOWED_SIGNERS"
+  printf "  ok   %-42s %s\n" "allowed_signers written" \
+    "$(wc -l < "$ALLOWED_SIGNERS" | tr -d ' ') principal(s)"
+}
 
 # --- signing key file --------------------------------------------------------
 # user.signingKey points at this file rather than at a literal key. Git hands it
@@ -75,12 +114,14 @@ if [ -n "$matched" ]; then
   chmod 600 "$SIGNING_PUB"
   printf "  ok   %-42s %s\n" "signing key matched against GitHub" \
     "$(ssh-keygen -lf "$SIGNING_PUB" 2>/dev/null | awk '{print $2}')"
+  write_allowed_signers
 elif [ -f "$SIGNING_PUB" ]; then
   printf "  ok   %-42s %s\n" "signing key file present" \
     "$(ssh-keygen -lf "$SIGNING_PUB" 2>/dev/null | awk '{print $2}')"
   echo "       Could not confirm it against GitHub's signing key list (no"
   echo "       network, no github.user set, or the key is not registered"
   echo "       there). Signing still works from this file."
+  write_allowed_signers
 else
   echo ""
   echo "  ##########################################################"
