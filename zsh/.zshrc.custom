@@ -48,3 +48,23 @@ unset _secretive_sock
 # Warp's 25-char truncation then eats the front of the path. Put it back. Warp
 # uses a separate variable over SSH, so the host still shows where it matters.
 ZSH_THEME_TERM_TITLE_IDLE="%~"
+
+# mise - per-directory tool versions. Activation hooks the prompt, so PATH is
+# recomputed on every `cd`: a repo's mise.toml applies inside its own tree and
+# nowhere else. Outside one, a tool may still run through the shim, at whatever
+# version happens to be installed -- unpinned, not absent.
+#
+# Without activation, `node` and friends resolve to whatever else is on PATH,
+# which matches the pin often enough to hide the problem until it does not.
+#
+# Editors and GUI git clients never source this file. They need the SHIM
+# directory on PATH instead: ~/.local/share/mise/shims
+#
+# NOT guarded silently: a missing mise means every pinned tool falls back to
+# whatever else is on PATH, which is the failure this line exists to prevent.
+# Say so instead.
+if command -v mise >/dev/null; then
+  eval "$(mise activate zsh)"
+else
+  print -u2 "zshrc.custom: mise is not installed, so tool versions are unpinned. brew install mise"
+fi
