@@ -104,8 +104,8 @@
 [pull]
 	rebase = true
 [user]
-	name = alexeyeryshev
-	email = a.a.eryshev@gmail.com
+	name = Alexey Eryshev
+	email = 7483130+alexeyeryshev@users.noreply.github.com
 	signingKey = ~/.ssh/git-signing.pub
 [github]
 	user = alexeyeryshev
