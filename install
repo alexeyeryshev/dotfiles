@@ -64,3 +64,10 @@ git submodule update --init --recursive "${AGENTS_VENDOR_DIR}"
 --plugin-dir dotbot-plugins/dotbot-git \
 --plugin-dir dotbot-plugins/dotbot-brew \
 "${@}"
+
+# Private config at ~/brain, when that repo is present. Missing = no-op.
+BRAIN_DIR="${HOME}/brain"
+if [ -f "${BRAIN_DIR}/install.conf.yaml" ]; then
+  "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" \
+    -d "${BRAIN_DIR}" -c "${BRAIN_DIR}/install.conf.yaml" "${@}"
+fi
