@@ -140,3 +140,9 @@
 # A missing file is a silent no-op, so this stays valid on a fresh machine.
 [include]
 	path = ~/.config/git/local.gitconfig
+[credential "https://github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
