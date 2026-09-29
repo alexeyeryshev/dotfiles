@@ -11,6 +11,18 @@
 
 ## Preferences
 
+### Secretive signing
+
+Secretive signing fails when the Mac is locked.
+Secretive signing works when the Mac is unlocked.
+The user is usually present to approve when they directly request work.
+Treat a direct request to continue or ship as authorization for one fresh signing attempt after a completed refusal.
+Leave a pending command alone and wait for the user.
+Do not retry in a loop during unattended work.
+Do not open, inspect, or control Secretive or manage its requests.
+Keep signing and checks enabled.
+Do not infer that a signing failure requires Touch ID.
+
 ### Write in Simplified Technical English
 
 <!-- ASD-STE100 is a writing style, so it has to apply to every answer. A skill
