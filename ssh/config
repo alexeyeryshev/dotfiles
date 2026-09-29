@@ -33,7 +33,7 @@ Host github.com
   User git
   ControlMaster auto
   ControlPath ~/.ssh/cm-%C
-  ControlPersist 4h
+  ControlPersist 24h
 
 # Once you keep more than a couple of keys in the agent, pin the right one to
 # avoid "Too many authentication failures":
