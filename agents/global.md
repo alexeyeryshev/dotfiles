@@ -11,16 +11,33 @@
 
 ## Preferences
 
+### GitHub authentication
+
+The user authorizes the existing GitHub CLI account and its stored keyring credential for authorized GitHub work.
+This authorization includes worktrees and unattended jobs.
+Prefer HTTPS for GitHub fetches and pushes.
+Use the configured `gh auth git-credential` helper with an explicit HTTPS URL when the remote uses SSH.
+Do not request separate permission to use this credential or change the transport.
+Do not print tokens or copy them into files or command arguments.
+
+Use HTTPS if SSH authentication stalls or fails.
+Terminate only your own stalled SSH Git command before the HTTPS retry.
+Check the remote branch before a push retry.
+Report an authentication blocker only after an HTTPS attempt fails.
+This authorization changes the transport, not the scope of the requested work.
+
 ### Secretive signing
 
 Secretive signing fails when the Mac is locked.
 Secretive signing works when the Mac is unlocked.
+HTTPS authentication does not replace the commit signature.
 The user is usually present to approve when they directly request work.
 Treat a direct request to continue or ship as authorization for one fresh signing attempt after a completed refusal.
-Leave a pending command alone and wait for the user.
-Do not retry in a loop during unattended work.
+Leave a pending commit-signature command alone and wait for the user.
+Do not retry signatures in a loop during unattended work.
 Do not open, inspect, or control Secretive or manage its requests.
 Keep signing and checks enabled.
+Do not replace a refused signature with an unsigned commit or a commit through the GitHub API.
 Do not infer that a signing failure requires Touch ID.
 
 ### Write in Simplified Technical English
